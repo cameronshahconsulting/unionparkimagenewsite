@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand palette: deep greens + warm neutrals + clay accent */
+  --color-pine-950: #122b21;
+  --color-pine-900: #16382b;
+  --color-pine-800: #1e4d38;
+  --color-pine-700: #276046;
+  --color-pine-600: #337a58;
+  --color-pine-500: #45936c;
+  --color-pine-100: #ddeee4;
+  --color-pine-50: #eff7f2;
+
+  --color-moss-600: #5a7a6a;
+  --color-moss-400: #8fa89b;
+  --color-moss-200: #cddad2;
+
+  --color-cream: #faf7f2;
+  --color-sand-100: #f3eee5;
+  --color-sand-200: #e9e1d3;
+  --color-sand-300: #d8ccb6;
+
+  --color-clay-700: #a04f24;
+  --color-clay-600: #b45e2e;
+  --color-clay-500: #c86f3c;
+  --color-clay-100: #f6e3d6;
+
+  --color-ink: #21302a;
+  --color-ink-soft: #4c5d55;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --shadow-lift: 0 10px 30px -12px rgb(18 43 33 / 0.25);
+  --shadow-card: 0 2px 12px -4px rgb(18 43 33 / 0.12);
+}
+
+/* Marketing site is intentionally light-only for brand consistency */
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
+  }
+  .btn-primary {
+    @apply bg-clay-600 text-white hover:bg-clay-700 shadow-lift;
+  }
+  .btn-secondary {
+    @apply bg-pine-800 text-white hover:bg-pine-900;
+  }
+  .btn-ghost {
+    @apply border border-pine-800/25 bg-white/70 text-pine-900 hover:border-pine-800/60 hover:bg-white;
+  }
+
+  .heading-display {
+    @apply font-display font-semibold tracking-tight text-pine-950;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-clay-600;
+  }
+
+  .card {
+    @apply rounded-2xl border border-sand-200 bg-white shadow-card;
+  }
+
+  .prose-site {
+    @apply text-[1.0625rem] leading-relaxed text-ink-soft;
+  }
+  .prose-site h2 {
+    @apply font-display font-semibold tracking-tight text-pine-950 mt-10 mb-4 text-2xl sm:text-3xl;
+  }
+  .prose-site h3 {
+    @apply font-display font-semibold tracking-tight text-pine-950 mt-8 mb-3 text-xl sm:text-2xl;
+  }
+  .prose-site p {
+    @apply my-4;
+  }
+  .prose-site ul {
+    @apply my-4 list-disc pl-6;
+  }
+  .prose-site ol {
+    @apply my-4 list-decimal pl-6;
+  }
+  .prose-site li {
+    @apply my-1.5;
+  }
+  .prose-site a {
+    @apply font-medium text-pine-700 underline underline-offset-4 hover:text-pine-900;
+  }
+  .prose-site strong {
+    @apply font-semibold text-pine-950;
+  }
+  .prose-site table {
+    @apply my-6 w-full border-collapse overflow-hidden rounded-xl text-sm;
+  }
+  .prose-site th {
+    @apply border border-sand-200 bg-pine-50 px-3 py-2 text-left font-semibold text-pine-950;
+  }
+  .prose-site td {
+    @apply border border-sand-200 bg-white px-3 py-2;
+  }
+  .prose-site blockquote {
+    @apply my-6 border-l-4 border-pine-500 bg-pine-50 px-5 py-3 italic text-pine-900;
+  }
+}
