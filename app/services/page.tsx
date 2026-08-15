@@ -5,6 +5,7 @@ import { CtaSection, Eyebrow } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { serviceContent } from "@/content/services";
 import { site } from "@/lib/site";
+import { servicePhotos } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Landscaping Services in New Castle County, DE",
@@ -17,7 +18,7 @@ export default function ServicesPage() {
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Services", href: "/services" },
         ])}
       />
@@ -42,7 +43,12 @@ export default function ServicesPage() {
                 href={`/services/${s.slug}`}
                 className="card group grid overflow-hidden transition-shadow hover:shadow-lift sm:grid-cols-[200px_1fr]"
               >
-                <Scene variant={s.scene} alt={`${s.short} illustration`} className="aspect-[16/9] sm:aspect-auto sm:h-full" />
+                <Scene
+                  variant={s.scene}
+                  photo={servicePhotos[s.slug]}
+                  alt={`${s.short} project example`}
+                  className="aspect-[16/9] sm:aspect-auto sm:h-full"
+                />
                 <div className="p-6">
                   <h2 className="font-display text-xl font-semibold text-pine-950 group-hover:text-pine-700">
                     {s.short}

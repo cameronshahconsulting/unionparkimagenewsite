@@ -16,7 +16,7 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: "80px",
-          background: "linear-gradient(135deg, #122b21 0%, #1e4d38 60%, #276046 100%)",
+          background: "linear-gradient(135deg, #062733 0%, #0c4c5f 55%, #1489a8 100%)",
           color: "white",
           fontFamily: "Georgia, serif",
         }}
@@ -27,25 +27,25 @@ export default function OgImage() {
               width: 64,
               height: 64,
               borderRadius: 999,
-              background: "#ddeee4",
+              background: "#dd1a83",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#1e4d38",
+              color: "#ffffff",
               fontSize: 28,
               fontWeight: 700,
             }}
           >
             UP
           </div>
-          <div style={{ fontSize: 34, letterSpacing: 6, textTransform: "uppercase", color: "#cddad2" }}>
+          <div style={{ fontSize: 34, letterSpacing: 6, textTransform: "uppercase", color: "#cfeef7" }}>
             Union Park Landscaping
           </div>
         </div>
         <div style={{ fontSize: 72, fontWeight: 700, marginTop: 48, lineHeight: 1.1, maxWidth: 950 }}>
           Landscaping in Wilmington &amp; New Castle County, DE
         </div>
-        <div style={{ display: "flex", fontSize: 32, marginTop: 32, color: "#cddad2" }}>
+        <div style={{ display: "flex", fontSize: 32, marginTop: 32, color: "#cfeef7" }}>
           {`5.0 on Google · Free estimates · ${site.phone}`}
         </div>
       </div>

@@ -19,7 +19,7 @@ export default function BlogIndexPage() {
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Blog", href: "/blog" },
         ])}
       />

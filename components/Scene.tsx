@@ -15,8 +15,9 @@ export type SceneVariant =
   | "home";
 
 const P = {
-  sky1: "#dcebe0",
-  sky2: "#f3efe4",
+  // Miami-blue sky; foliage stays natural green; blooms carry the hot-pink brand accent.
+  sky1: "#cdeaf2",
+  sky2: "#eef8fb",
   hillBack: "#a7c0ae",
   hillFront: "#7fa38c",
   ground: "#5d8a6f",
@@ -27,11 +28,11 @@ const P = {
   paver: "#c9b394",
   paverDark: "#b09873",
   clay: "#c86f3c",
-  water: "#9fc3cf",
+  water: "#8fcdda",
   fence: "#d8ccb6",
-  bloom1: "#e3a05c",
-  bloom2: "#c86f3c",
-  bloom3: "#f0d7a3",
+  bloom1: "#f23f9c",
+  bloom2: "#dd1a83",
+  bloom3: "#f2e4c4",
 };
 
 function Tree({ x, y, s = 1, round = false }: { x: number; y: number; s?: number; round?: boolean }) {
@@ -227,7 +228,14 @@ export function Scene({
   if (photo) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
-        <Image src={photo} alt={alt} fill className="object-cover" priority={priority} />
+        <Image
+          src={photo}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+          className="object-cover"
+          priority={priority}
+        />
       </div>
     );
   }

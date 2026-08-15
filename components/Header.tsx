@@ -8,6 +8,7 @@ import { site } from "@/lib/site";
 
 const nav = [
   { href: "/services", label: "Services" },
+  { href: "/designer", label: "AI Designer" },
   { href: "/service-areas", label: "Service Areas" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
@@ -21,7 +22,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-sand-200 bg-cream/90 backdrop-blur supports-[backdrop-filter]:bg-cream/75">
       <div className="container-site flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
-        <Link href="/" aria-label={`${site.name} home`} onClick={() => setOpen(false)}>
+        <Link href="/home" aria-label={`${site.name} home`} onClick={() => setOpen(false)}>
           <Logo />
         </Link>
 

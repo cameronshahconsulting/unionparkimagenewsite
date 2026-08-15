@@ -16,7 +16,7 @@ export default function ContactPage() {
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Contact", href: "/contact" },
         ])}
       />
@@ -61,7 +61,7 @@ export default function ContactPage() {
                 <p className="font-semibold text-pine-950">Want a visual first?</p>
                 <p className="mt-1 text-sm leading-relaxed text-ink-soft">
                   Upload a photo of your yard to our free{" "}
-                  <Link href="/#visualizer" className="font-semibold text-clay-600 underline underline-offset-4">
+                  <Link href="/home/#visualizer" className="font-semibold text-clay-600 underline underline-offset-4">
                     AI Yard Designer
                   </Link>{" "}
                   and send us the design you like with your estimate request.

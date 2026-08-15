@@ -6,6 +6,7 @@ import { CtaSection, FaqSection, Eyebrow } from "@/components/Sections";
 import { JsonLd, serviceJsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { serviceContent, getService } from "@/content/services";
 import { site } from "@/lib/site";
+import { servicePhotos } from "@/lib/photos";
 
 export function generateStaticParams() {
   return serviceContent.map((s) => ({ slug: s.slug }));
@@ -42,7 +43,7 @@ export default async function ServicePage({
       <JsonLd data={serviceJsonLd({ slug: service.slug, name: service.name, blurb: service.metaDescription })} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Services", href: "/services" },
           { name: service.short, href: `/services/${service.slug}` },
         ])}
@@ -73,7 +74,8 @@ export default async function ServicePage({
           </div>
           <Scene
             variant={service.scene}
-            alt={`${service.short} illustration`}
+            photo={servicePhotos[service.slug]}
+            alt={`${service.short} project example`}
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />
@@ -136,7 +138,7 @@ export default async function ServicePage({
                 Curious how this would look on your property? Try our free AI yard
                 designer with a photo of your yard.
               </p>
-              <Link href="/#visualizer" className="mt-3 inline-block text-sm font-semibold text-clay-600 hover:underline">
+              <Link href="/home/#visualizer" className="mt-3 inline-block text-sm font-semibold text-clay-600 hover:underline">
                 Open the AI Yard Designer →
               </Link>
             </div>
@@ -153,7 +155,12 @@ export default async function ServicePage({
           <div className="mt-6 grid gap-6 sm:grid-cols-3">
             {related.map((r) => (
               <Link key={r.slug} href={`/services/${r.slug}`} className="card group overflow-hidden transition-shadow hover:shadow-lift">
-                <Scene variant={r.scene} alt="" className="aspect-[16/9]" />
+                <Scene
+                  variant={r.scene}
+                  photo={servicePhotos[r.slug]}
+                  alt=""
+                  className="aspect-[16/9]"
+                />
                 <div className="p-5">
                   <h3 className="font-display font-semibold text-pine-950 group-hover:text-pine-700">{r.short}</h3>
                 </div>

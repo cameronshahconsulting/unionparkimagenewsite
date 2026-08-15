@@ -1,38 +1,45 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette: deep greens + warm neutrals + clay accent */
-  --color-pine-950: #122b21;
-  --color-pine-900: #16382b;
-  --color-pine-800: #1e4d38;
-  --color-pine-700: #276046;
-  --color-pine-600: #337a58;
-  --color-pine-500: #45936c;
-  --color-pine-100: #ddeee4;
-  --color-pine-50: #eff7f2;
+  /* Brand palette: Miami blue (primary) + hot pink (accent) + cool neutrals.
+     Token names are kept from the previous theme so component classes still
+     resolve; only the underlying color values changed. */
 
-  --color-moss-600: #5a7a6a;
-  --color-moss-400: #8fa89b;
-  --color-moss-200: #cddad2;
+  /* Primary — Miami blue, from deep ink-teal (headings/text) to bright cyan. */
+  --color-pine-950: #062733;
+  --color-pine-900: #093544;
+  --color-pine-800: #0c4c5f;
+  --color-pine-700: #0f6884;
+  --color-pine-600: #1489a8;
+  --color-pine-500: #17aacb;
+  --color-pine-100: #cfeef7;
+  --color-pine-50: #ecf8fc;
 
-  --color-cream: #faf7f2;
-  --color-sand-100: #f3eee5;
-  --color-sand-200: #e9e1d3;
-  --color-sand-300: #d8ccb6;
+  /* Supporting — muted blue-grays. */
+  --color-moss-600: #5a7581;
+  --color-moss-400: #90a8b1;
+  --color-moss-200: #cbdce1;
 
-  --color-clay-700: #a04f24;
-  --color-clay-600: #b45e2e;
-  --color-clay-500: #c86f3c;
-  --color-clay-100: #f6e3d6;
+  /* Neutrals — clean, cool near-whites. */
+  --color-cream: #f6fafb;
+  --color-sand-100: #eef4f6;
+  --color-sand-200: #e0eaee;
+  --color-sand-300: #ccdae0;
 
-  --color-ink: #21302a;
-  --color-ink-soft: #4c5d55;
+  /* Accent — hot pink (CTAs, eyebrows, highlights). */
+  --color-clay-700: #b3126a;
+  --color-clay-600: #dd1a83;
+  --color-clay-500: #f23f9c;
+  --color-clay-100: #fbdcee;
+
+  --color-ink: #0e2730;
+  --color-ink-soft: #486570;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --shadow-lift: 0 10px 30px -12px rgb(18 43 33 / 0.25);
-  --shadow-card: 0 2px 12px -4px rgb(18 43 33 / 0.12);
+  --shadow-lift: 0 10px 30px -12px rgb(6 39 51 / 0.25);
+  --shadow-card: 0 2px 12px -4px rgb(6 39 51 / 0.12);
 }
 
 /* Marketing site is intentionally light-only for brand consistency */

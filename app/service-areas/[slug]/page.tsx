@@ -7,6 +7,7 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { townContent, getTown } from "@/content/towns";
 import { getService } from "@/content/services";
 import { site } from "@/lib/site";
+import { photos } from "@/lib/photos";
 
 export function generateStaticParams() {
   return townContent.map((t) => ({ slug: t.slug }));
@@ -44,7 +45,7 @@ export default async function TownPage({
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Service Areas", href: "/service-areas" },
           { name: `${town.name}, DE`, href: `/service-areas/${town.slug}` },
         ])}
@@ -70,7 +71,8 @@ export default async function TownPage({
           </div>
           <Scene
             variant="home"
-            alt={`Illustration of a landscaped home in ${town.name}, Delaware`}
+            photo={photos.townHero}
+            alt={`Landscaped home in ${town.name}, Delaware`}
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />
@@ -103,7 +105,7 @@ export default async function TownPage({
                   </li>
                 ))}
               </ul>
-              <Link href="/#visualizer" className="mt-5 inline-block text-sm font-semibold text-clay-600 hover:underline">
+              <Link href="/home/#visualizer" className="mt-5 inline-block text-sm font-semibold text-clay-600 hover:underline">
                 Preview your {town.name} yard with AI →
               </Link>
             </div>

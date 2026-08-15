@@ -1,237 +1,111 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Scene } from "@/components/Scene";
-import { TrustBar, Testimonials, FaqSection, CtaSection, Eyebrow } from "@/components/Sections";
-import { YardVisualizer } from "@/components/visualizer/YardVisualizer";
-import { site, services, towns, yearsInBusiness } from "@/lib/site";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Landscaping in Wilmington, DE | ${site.name}`,
-  description: `Top-rated landscaping company in Wilmington & New Castle County, DE. Patios, drainage, fencing, cleanups, lawn care & landscape design since ${site.foundedYear}. Free estimates — call ${site.phone}.`,
+  title: `Choose a destination | ${site.name} & Annie's Online Nursery`,
+  description: `Scan our trailer QR? Choose Union Park Landscaping for outdoor services, or Annie's Online Nursery for plants delivered across the Delaware Valley.`,
   alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
 };
 
-const sceneByService = {
-  "landscape-design": "garden",
-  hardscaping: "patio",
-  drainage: "drainage",
-  fencing: "fence",
-  "yard-cleanups": "cleanup",
-  "lawn-care": "lawn",
-} as const;
-
-const homeFaqs = [
-  {
-    q: "How much does landscaping cost in Wilmington, DE?",
-    a: "Most of our New Castle County projects fall between $500 for a seasonal cleanup and $15,000+ for a full paver patio with new plantings. Every property is different, so we give free written estimates — usually within 24 hours of your call.",
-  },
-  {
-    q: "What areas does Union Park Landscaping serve?",
-    a: "We serve all of New Castle County, Delaware, including Wilmington, Newark, Hockessin, Pike Creek, Greenville, Bear, and Middletown.",
-  },
-  {
-    q: "Are estimates really free?",
-    a: "Yes. We walk your property, talk through what you want, and give you a clear written quote at no cost and with no obligation.",
-  },
-  {
-    q: "How does the AI yard designer work?",
-    a: "Upload a photo of your yard, describe the changes you want, and optionally add inspiration photos. Our AI generates a realistic redesign of your actual yard — up to 3 designs per day, free. Pick your favorite and send it to us for a real quote.",
-  },
-  {
-    q: "How soon can you start my project?",
-    a: "Small jobs like cleanups are often scheduled within the week. Larger builds like patios and drainage systems typically start within 2–4 weeks depending on the season.",
-  },
-  {
-    q: "Are you licensed and insured?",
-    a: `Yes — ${site.name} is fully licensed and insured in Delaware, and every job is backed by our 100% satisfaction guarantee.`,
-  },
-];
-
-export default function HomePage() {
+export default function LinkTreePage() {
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="container-site grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr]">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-4 py-1.5 text-sm font-medium text-pine-900 shadow-card">
-              <span className="text-clay-500">★★★★★</span> 5.0 on Google · {yearsInBusiness}+ years local
-            </p>
-            <h1 className="heading-display mt-5 text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
-              Your yard, done right —{" "}
-              <span className="text-pine-700">and done to last.</span>
-            </h1>
-            <p className="mt-5 max-w-xl text-lg text-ink-soft">
-              Landscape design, paver patios, drainage fixes, fencing, cleanups, and
-              lawn care for homeowners across {site.address.county}, Delaware.
-              Family-run since {site.foundedYear}. {site.tagline}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
-                Get a Free Estimate
-              </Link>
-              <a href="#visualizer" className="btn-ghost">
-                Try the AI Yard Designer ↓
-              </a>
-            </div>
-            <p className="mt-4 text-sm text-ink-soft">
-              Or call{" "}
-              <a href={site.phoneHref} className="font-semibold text-pine-800 underline underline-offset-4">
-                {site.phone}
-              </a>{" "}
-              — {site.hours.days}, {site.hours.open}–{site.hours.close}
-            </p>
-          </div>
-          <div className="relative">
-            <Scene
-              variant="home"
-              alt="Illustration of a landscaped Delaware home with new plantings, trees, and a walkway"
-              className="aspect-[4/3] w-full rounded-3xl shadow-lift"
-              priority
-            />
-            <div className="absolute -bottom-4 left-6 rounded-xl bg-white px-4 py-3 shadow-lift">
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Satisfaction</p>
-              <p className="font-display text-xl font-semibold text-pine-800">100% Guaranteed</p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <div className="relative flex min-h-dvh flex-col overflow-hidden">
+      {/* Atmosphere */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(ellipse 80% 60% at 20% 10%, rgb(20 137 168 / 0.18), transparent 55%),
+            radial-gradient(ellipse 70% 50% at 90% 80%, rgb(221 26 131 / 0.14), transparent 50%),
+            linear-gradient(165deg, #ecf8fc 0%, #f6fafb 45%, #fbdcee 100%)
+          `,
+        }}
+      />
 
-      <TrustBar />
+      <div className="relative mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-5 py-12 sm:px-6">
+        <header className="text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-pine-700">
+            Welcome
+          </p>
+          <h1 className="heading-display mt-3 text-3xl leading-tight text-pine-950 sm:text-4xl">
+            Where would you like to go?
+          </h1>
+          <p className="mt-3 text-base text-ink-soft">
+            Two brands, one family. Pick the site that fits what you need.
+          </p>
+        </header>
 
-      {/* AI Visualizer */}
-      <section id="visualizer" className="scroll-mt-24 py-16 sm:py-24">
-        <div className="container-site">
-          <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Free AI design tool</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
-              See your new yard before we build it
-            </h2>
-            <p className="mt-4 text-ink-soft">
-              Upload a photo of your yard, tell us what you want changed, and our AI
-              will show you a realistic redesign of <em>your actual property</em> in
-              about a minute. Love one? Send it straight to us for a free estimate.
-            </p>
-          </div>
-          <div className="mt-10">
-            <YardVisualizer />
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="bg-white py-16 sm:py-24">
-        <div className="container-site">
-          <div className="max-w-2xl">
-            <Eyebrow>What we do</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
-              Six trades. One trusted local crew.
-            </h2>
-          </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="card group overflow-hidden transition-shadow hover:shadow-lift"
+        <nav aria-label="Brand destinations" className="mt-10 flex flex-col gap-4">
+          <Link
+            href="/home"
+            className="group relative overflow-hidden rounded-2xl border border-pine-800/15 bg-white/90 p-6 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-pine-600/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-pine-600">
+                  Landscaping &amp; outdoor services
+                </p>
+                <p className="mt-2 font-display text-2xl font-semibold text-pine-950 group-hover:text-pine-700">
+                  Union Park Landscaping
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Design, patios, drainage, fencing, cleanups &amp; lawn care across
+                  New Castle County, DE.
+                </p>
+              </div>
+              <span
+                aria-hidden
+                className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-pine-800 text-lg text-white transition group-hover:bg-pine-700"
               >
-                <Scene
-                  variant={sceneByService[s.slug as keyof typeof sceneByService]}
-                  alt={`${s.short} illustration`}
-                  className="aspect-[16/9]"
-                />
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-pine-950 group-hover:text-pine-700">
-                    {s.short}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.blurb}</p>
-                  <p className="mt-4 text-sm font-semibold text-clay-600">
-                    Learn more <span aria-hidden>→</span>
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+                →
+              </span>
+            </div>
+          </Link>
 
-      {/* How it works */}
-      <section className="py-16 sm:py-24">
-        <div className="container-site">
-          <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Simple process</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
-              From phone call to finished yard
-            </h2>
-          </div>
-          <ol className="mt-12 grid gap-8 md:grid-cols-3">
-            {[
-              {
-                n: "1",
-                t: "Tell us what you need",
-                d: `Call ${site.phone}, request an estimate online, or send us an AI design you made above. We'll respond fast — often the same day.`,
-              },
-              {
-                n: "2",
-                t: "Get a clear, free quote",
-                d: "We walk your property, answer questions, and give you a written estimate with no pressure and no surprises.",
-              },
-              {
-                n: "3",
-                t: "We build it right",
-                d: "Our crew shows up on time, does the work to spec, and leaves your property spotless — backed by our satisfaction guarantee.",
-              },
-            ].map((s) => (
-              <li key={s.n} className="relative rounded-2xl border border-sand-200 bg-white p-7 shadow-card">
-                <span className="font-display absolute -top-5 left-7 flex h-10 w-10 items-center justify-center rounded-full bg-pine-800 text-lg font-semibold text-white">
-                  {s.n}
-                </span>
-                <h3 className="mt-3 font-display text-xl font-semibold text-pine-950">{s.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.d}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+          <a
+            href={site.sisterBrand.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative overflow-hidden rounded-2xl border border-clay-600/20 bg-white/90 p-6 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-clay-500/50 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay-600"
+          >
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-clay-600">
+                  Plants &amp; nursery delivery
+                </p>
+                <p className="mt-2 font-display text-2xl font-semibold text-pine-950 group-hover:text-clay-700">
+                  {site.sisterBrand.name}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                  Sourced &amp; grown across the Delaware Valley — browse plants and
+                  get free local delivery on qualifying orders.
+                </p>
+              </div>
+              <span
+                aria-hidden
+                className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-clay-600 text-lg text-white transition group-hover:bg-clay-700"
+              >
+                ↗
+              </span>
+            </div>
+          </a>
+        </nav>
 
-      <Testimonials />
-
-      {/* Service area */}
-      <section className="py-16 sm:py-24">
-        <div className="container-site grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <Eyebrow>Local &amp; nearby</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
-              Proudly serving New Castle County
-            </h2>
-            <p className="mt-4 text-ink-soft">
-              We&apos;re based in Wilmington and work throughout northern Delaware. If
-              you&apos;re in one of these towns, you&apos;re in our service area — and
-              if you&apos;re close, call us anyway.
-            </p>
-            <ul className="mt-6 flex flex-wrap gap-2.5">
-              {towns.map((t) => (
-                <li key={t.slug}>
-                  <Link
-                    href={`/service-areas/${t.slug}`}
-                    className="inline-block rounded-full border border-pine-800/20 bg-white px-4 py-2 text-sm font-medium text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
-                  >
-                    {t.name}, DE
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <Scene
-            variant="garden"
-            alt="Illustration of a professionally landscaped garden bed with trees, shrubs, and seasonal flowers"
-            className="aspect-[4/3] w-full rounded-3xl shadow-lift"
-          />
-        </div>
-      </section>
-
-      <FaqSection faqs={homeFaqs} />
-      <CtaSection />
-    </>
+        <footer className="mt-12 text-center text-sm text-ink-soft">
+          <p>
+            Call either brand at{" "}
+            <a href={site.phoneHref} className="font-semibold text-pine-800 underline underline-offset-4">
+              {site.phone}
+            </a>
+          </p>
+          <p className="mt-2 text-xs text-moss-600">
+            Trailer QR landing · Wilmington &amp; New Castle County, DE
+          </p>
+        </footer>
+      </div>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ export default function ServiceAreasPage() {
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Service Areas", href: "/service-areas" },
         ])}
       />

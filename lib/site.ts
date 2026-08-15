@@ -24,6 +24,15 @@ export const site = {
   social: {
     google: "https://www.google.com/search?q=Union+Park+Landscaping+Wilmington+DE",
   },
+  /** Sister brand linked from the trailer QR chooser at `/`. */
+  sisterBrand: {
+    name: "Annie's Online Nursery",
+    short: "Annie's",
+    url: "https://anniesonlinenursery.com",
+    cartUrl: "https://anniesonlinenursery.com/cart",
+    designerUrl: "https://anniesonlinenursery.com/designer",
+    designerTermsUrl: "https://anniesonlinenursery.com/designer-terms",
+  },
 } as const;
 
 export const yearsInBusiness = new Date().getFullYear() - site.foundedYear;

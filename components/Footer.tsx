@@ -62,7 +62,17 @@ export function Footer() {
             <li><Link href="/gallery" className="hover:text-white hover:underline">Project Gallery</Link></li>
             <li><Link href="/blog" className="hover:text-white hover:underline">Landscaping Blog</Link></li>
             <li><Link href="/contact" className="hover:text-white hover:underline">Free Estimate</Link></li>
-            <li><Link href="/#visualizer" className="hover:text-white hover:underline">AI Yard Visualizer</Link></li>
+            <li><Link href="/home/#visualizer" className="hover:text-white hover:underline">AI Yard Visualizer</Link></li>
+            <li>
+              <a
+                href={site.sisterBrand.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white hover:underline"
+              >
+                {site.sisterBrand.name} ↗
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

@@ -46,7 +46,7 @@ export default async function BlogPostPage({
       <JsonLd data={blogPostingJsonLd(post)} />
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "Blog", href: "/blog" },
           { name: post.title, href: `/blog/${post.slug}` },
         ])}
@@ -76,7 +76,7 @@ export default async function BlogPostPage({
             <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
               We give free written estimates across New Castle County — or preview
               changes first with our{" "}
-              <Link href="/#visualizer" className="font-semibold text-pine-700 underline underline-offset-4">
+              <Link href="/home/#visualizer" className="font-semibold text-pine-700 underline underline-offset-4">
                 free AI yard designer
               </Link>
               .

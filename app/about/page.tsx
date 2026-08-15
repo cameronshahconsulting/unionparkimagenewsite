@@ -4,6 +4,7 @@ import { Scene } from "@/components/Scene";
 import { CtaSection, TrustBar, Eyebrow } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { site, yearsInBusiness } from "@/lib/site";
+import { photos } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "About Us | Family-Run Landscaping in Wilmington, DE",
@@ -35,7 +36,7 @@ export default function AboutPage() {
     <>
       <JsonLd
         data={breadcrumbJsonLd([
-          { name: "Home", href: "/" },
+          { name: "Home", href: "/home" },
           { name: "About", href: "/about" },
         ])}
       />
@@ -62,7 +63,8 @@ export default function AboutPage() {
           </div>
           <Scene
             variant="home"
-            alt="Illustration of a well-kept Delaware home landscape"
+            photo={photos.aboutCrew}
+            alt="Union Park Landscaping crew installing plants at a Delaware residential jobsite"
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />
@@ -94,7 +96,8 @@ export default function AboutPage() {
         <div className="container-site grid items-center gap-10 lg:grid-cols-2">
           <Scene
             variant="garden"
-            alt="Illustration of layered garden beds with native Delaware plants"
+            photo={photos.aboutGarden}
+            alt="Close-up of a landscaper planting shrubs in a prepared garden bed"
             className="order-2 aspect-[4/3] w-full rounded-3xl shadow-lift lg:order-1"
           />
           <div className="order-1 lg:order-2">
