@@ -8,7 +8,10 @@ export function Footer() {
       <div className="container-site grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Logo light />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-moss-200">
+          <p className="mt-4 text-base font-extrabold tracking-tight text-clay-500">
+            “{site.motto}”
+          </p>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-moss-200">
             {site.tagline} Family-run landscaping serving New Castle County,
             Delaware for {yearsInBusiness}+ years.
           </p>

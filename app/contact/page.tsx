@@ -7,7 +7,7 @@ import { site, towns } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Free Landscaping Estimate | Contact Us",
-  description: `Get a free landscaping estimate in Wilmington & New Castle County, DE. Call ${site.phone} or request online — most quotes within 24 hours.`,
+  description: `Get a free landscaping estimate in Wilmington & New Castle County, DE. Call ${site.phone} or request online. Most quotes within 24 hours.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -29,7 +29,7 @@ export default function ContactPage() {
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
               Tell us what you&apos;re dealing with and we&apos;ll get you a clear,
-              written estimate — usually within 24 hours. Prefer to talk?
+              written estimate, usually within 24 hours. Prefer to talk?
             </p>
 
             <div className="mt-8 space-y-5">

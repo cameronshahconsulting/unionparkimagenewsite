@@ -10,16 +10,26 @@
   --serif:'Fraunces',Georgia,serif;--script:'Dancing Script',cursive;--sans:'Nunito Sans',system-ui,sans-serif;
   --maxw:1220px;
 }
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:var(--sans);color:var(--bark);background:var(--cream) url('/art/leaf-texture.svg');background-size:260px;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:var(--serif);color:var(--fern);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:0}
-p{margin:0}
-/* bare anchor reset — keeps button classes winning on color */
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+
+/* Scoped to .annies-designer so this sheet does not break the UPL site
+   (global img/h1/body resets were collapsing Next Image fills + restyling heroes). */
+.annies-designer,.annies-designer *{box-sizing:border-box}
+.annies-designer{
+  font-family:var(--sans);
+  color:var(--bark);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.annies-designer h1,.annies-designer h2,.annies-designer h3,.annies-designer h4{
+  font-family:var(--serif);color:var(--fern);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:0
+}
+.annies-designer p{margin:0}
+.annies-designer a{color:inherit;text-decoration:none}
+.annies-designer img{max-width:100%;display:block}
+.annies-designer .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+.annies-designer .eyebrow{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--sprout);margin:0 0 12px}
+.annies-designer .script{font-family:var(--script)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,5vw,48px)}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--sprout);margin:0 0 12px}
 .script{font-family:var(--script)}
 
 /* ---------- BUTTONS (high contrast, brand colors) ---------- */
@@ -588,8 +598,21 @@ body.menu-open{overflow:hidden;position:relative;overscroll-behavior:none}
 .impact-page .impact-legal{margin:28px 0 0;font-size:12.5px;color:#6b6252;line-height:1.5;text-align:left}
 
 /* ---------- growing loader ---------- */
-.dz-grow{margin-top:16px;padding:38px 20px;border-radius:18px;background:#fff;border:1px solid rgba(181,136,91,.22);text-align:center}
-.dz-ring{position:relative;width:120px;height:120px;margin:0 auto 18px}
+.dz-grow{
+  margin:8px 0 0;
+  padding:48px 28px;
+  min-height:300px;
+  border-radius:18px;
+  background:#fff;
+  border:1px solid rgba(181,136,91,.22);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+.dz-ring{position:relative;width:120px;height:120px;margin:0 0 8px;flex:0 0 auto}
 .dz-ring svg{display:block}
 .dz-ring-track{fill:none;stroke:rgba(110,139,91,.18);stroke-width:8}
 .dz-ring-fill{fill:none;stroke:var(--sprout);stroke-width:8;stroke-linecap:round;transition:stroke-dasharray .2s linear}
@@ -604,9 +627,9 @@ body.menu-open{overflow:hidden;position:relative;overscroll-behavior:none}
 @keyframes dz-leaf-l{0%{opacity:0;transform:scale(.3)}30%,100%{opacity:1;transform:scale(1)}}
 @keyframes dz-leaf-r{0%{opacity:0;transform:scaleX(-1) scale(.3)}30%,100%{opacity:1;transform:scaleX(-1) scale(1)}}
 @keyframes dz-bud{0%{transform:translateX(-50%) scale(0)}40%,100%{transform:translateX(-50%) scale(1)}}
-.dz-grow-title{font-family:var(--serif);font-weight:600;color:var(--fern);font-size:20px;margin:0 0 7px}
-.dz-grow-sub{font-size:13.5px;color:#6b6252;margin:0 auto;max-width:36ch;line-height:1.45}
-.dz-grow-eta{margin:14px 0 0;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--cedar)}
+.dz-grow-title{font-family:var(--serif);font-weight:600;color:var(--fern);font-size:20px;margin:0;line-height:1.25}
+.dz-grow-sub{font-size:13.5px;color:#6b6252;margin:0;max-width:36ch;line-height:1.5}
+.dz-grow-eta{margin:6px 0 0;font-size:12.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--cedar)}
 .dz-otp{letter-spacing:.35em;text-align:center;font-weight:800;font-size:22px}
 
 /* ---------- add-to-cart flash ---------- */

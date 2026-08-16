@@ -32,7 +32,7 @@ export default function BlogIndexPage() {
             </h1>
             <p className="mt-4 text-lg text-ink-soft">
               Real local prices, plants that actually survive here, and fixes that
-              last — written by the crew that does the work.
+              last, written by the crew that does the work.
             </p>
           </div>
 

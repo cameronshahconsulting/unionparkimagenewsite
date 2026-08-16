@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileStickyCta } from "@/components/MobileStickyCta";
 
 /** Trailer QR linktree at `/` is chrome-free; the rest of the UPL site keeps nav + footer. */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
@@ -20,6 +21,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         {children}
       </main>
       <Footer />
+      <MobileStickyCta />
     </>
   );
 }

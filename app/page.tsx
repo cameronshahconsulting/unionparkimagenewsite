@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,25 +13,29 @@ export const metadata: Metadata = {
 export default function LinkTreePage() {
   return (
     <div className="relative flex min-h-dvh flex-col overflow-hidden">
-      {/* Atmosphere */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background: `
-            radial-gradient(ellipse 80% 60% at 20% 10%, rgb(20 137 168 / 0.18), transparent 55%),
-            radial-gradient(ellipse 70% 50% at 90% 80%, rgb(221 26 131 / 0.14), transparent 50%),
-            linear-gradient(165deg, #ecf8fc 0%, #f6fafb 45%, #fbdcee 100%)
+            radial-gradient(ellipse 70% 55% at 15% 0%, rgb(23 170 203 / 0.16), transparent 55%),
+            radial-gradient(ellipse 60% 50% at 95% 85%, rgb(221 26 131 / 0.12), transparent 50%),
+            linear-gradient(165deg, #eef3e6 0%, #f1f4eb 40%, #e6ece0 100%)
           `,
         }}
       />
 
       <div className="relative mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-5 py-12 sm:px-6">
         <header className="text-center">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-pine-700">
-            Welcome
-          </p>
-          <h1 className="heading-display mt-2.5 text-3xl text-pine-950 sm:text-4xl">
+          <Image
+            src="/images/upl-logo.png"
+            alt={site.name}
+            width={960}
+            height={148}
+            className="mx-auto h-14 w-auto sm:h-16"
+            priority
+          />
+          <h1 className="heading-display mt-6 text-3xl text-pine-950 sm:text-4xl">
             Where would you like to go?
           </h1>
           <p className="mt-2.5 text-base text-ink-soft">
@@ -41,7 +46,7 @@ export default function LinkTreePage() {
         <nav aria-label="Brand destinations" className="mt-8 flex flex-col gap-3">
           <Link
             href="/home"
-            className="group relative overflow-hidden rounded-xl border border-pine-800/15 bg-white/95 p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-pine-600/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700"
+            className="group relative overflow-hidden rounded-2xl border border-pine-800/15 bg-white/95 p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-pine-600/40 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -69,7 +74,7 @@ export default function LinkTreePage() {
             href={site.sisterBrand.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden rounded-xl border border-clay-600/20 bg-white/95 p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-clay-500/50 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay-600"
+            className="group relative overflow-hidden rounded-2xl border border-clay-600/20 bg-white/95 p-5 shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-clay-500/50 hover:shadow-lift focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-clay-600"
           >
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -80,7 +85,7 @@ export default function LinkTreePage() {
                   {site.sisterBrand.name}
                 </p>
                 <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-                  Sourced &amp; grown across the Delaware Valley — browse plants and
+                  Sourced &amp; grown across the Delaware Valley. Browse plants and
                   get free local delivery on qualifying orders.
                 </p>
               </div>
@@ -100,9 +105,6 @@ export default function LinkTreePage() {
             <a href={site.phoneHref} className="font-extrabold text-pine-800 underline underline-offset-4">
               {site.phone}
             </a>
-          </p>
-          <p className="mt-1.5 text-xs font-semibold text-moss-600">
-            Trailer QR landing · Wilmington &amp; New Castle County, DE
           </p>
         </footer>
       </div>

@@ -74,7 +74,7 @@ export default async function BlogPostPage({
               Dealing with this in your own yard?
             </p>
             <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">
-              We give free written estimates across New Castle County — or preview
+              We give free written estimates across New Castle County, or preview
               changes first with our{" "}
               <Link href="/home/#visualizer" className="font-semibold text-pine-700 underline underline-offset-4">
                 free AI yard designer

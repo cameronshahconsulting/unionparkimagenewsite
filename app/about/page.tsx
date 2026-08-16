@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const values = [
   {
     t: "Show up when we say we will",
-    d: "The most common review we get isn't about plants — it's about responsiveness. We answer the phone, we quote fast, and we start when promised.",
+    d: "The most common review we get isn't about plants. It's about responsiveness. We answer the phone, we quote fast, and we start when promised.",
   },
   {
     t: "Do it right or don't do it",
@@ -23,7 +23,7 @@ const values = [
   },
   {
     t: "Quote honestly",
-    d: "Written estimates with real numbers. If a cheaper fix will solve your problem, we'll tell you — that's how we've kept a 5.0 rating.",
+    d: "Written estimates with real numbers. If a cheaper fix will solve your problem, we'll tell you. That's how we've kept a 5.0 rating.",
   },
   {
     t: "Leave it spotless",
@@ -44,7 +44,10 @@ export default function AboutPage() {
         <div className="container-site grid items-center gap-10 lg:grid-cols-2">
           <div>
             <Eyebrow>Since {site.foundedYear}</Eyebrow>
-            <h1 className="heading-display mt-2 text-4xl sm:text-5xl">
+            <p className="mt-3 text-xl font-extrabold tracking-tight text-clay-600 sm:text-2xl">
+              “{site.motto}”
+            </p>
+            <h1 className="heading-display mt-3 text-4xl sm:text-5xl">
               A local crew that treats your yard like our reputation
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">
@@ -55,7 +58,7 @@ export default function AboutPage() {
               business model.
             </p>
             <p className="mt-4 leading-relaxed text-ink-soft">
-              We&apos;re based in Wilmington and we stay local on purpose — Wilmington,
+              We&apos;re based in Wilmington and we stay local on purpose. Wilmington,
               Newark, Hockessin, Pike Creek, Greenville, Bear, and Middletown. Working
               close to home means we know the clay soil, the deer pressure, the HOA
               quirks, and the way water moves through these neighborhoods.
@@ -108,7 +111,7 @@ export default function AboutPage() {
             <p className="mt-4 leading-relaxed text-ink-soft">
               We&apos;re licensed and insured in Delaware, we call Miss Utility before
               we dig, and we back every project with a 100% satisfaction guarantee. If
-              something isn&apos;t right, we come back and make it right — that&apos;s
+              something isn&apos;t right, we come back and make it right. That&apos;s
               not fine print, it&apos;s the reason people refer us to their neighbors.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">

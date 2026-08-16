@@ -31,7 +31,7 @@ export default function ServicesPage() {
             </h1>
             <p className="mt-4 text-lg text-ink-soft">
               One local crew for design, hardscaping, drainage, fencing, cleanups, and
-              lawn care — so you never have to coordinate three contractors for one
+              lawn care, so you never have to coordinate three contractors for one
               yard. Every service comes with a free written estimate.
             </p>
           </div>

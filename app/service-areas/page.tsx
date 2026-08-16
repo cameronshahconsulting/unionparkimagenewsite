@@ -28,7 +28,7 @@ export default function ServiceAreasPage() {
               Landscaping across New Castle County
             </h1>
             <p className="mt-4 text-lg text-ink-soft">
-              We&apos;re based in Wilmington and stay local on purpose — it&apos;s how
+              We&apos;re based in Wilmington and stay local on purpose. It&apos;s how
               we keep response times fast and quality high. Pick your town for local
               details, common projects, and answers.
             </p>

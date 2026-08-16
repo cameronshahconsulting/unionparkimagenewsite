@@ -16,7 +16,7 @@ export function localBusinessJsonLd() {
     "@id": `${site.url}/#business`,
     name: site.name,
     legalName: site.legalName,
-    slogan: site.tagline,
+    slogan: site.motto,
     url: site.url,
     telephone: `+1-${site.phone}`,
     email: site.email,

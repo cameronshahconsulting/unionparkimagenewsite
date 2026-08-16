@@ -2,6 +2,7 @@ export const site = {
   name: "Union Park Landscaping",
   legalName: "Union Park Landscaping LLC",
   tagline: "Quality Maintenance, Lasting Impressions.",
+  motto: "We love to get down and dirty.",
   phone: "302-757-5496",
   phoneHref: "tel:+13027575496",
   email: "unionparklandscaping@gmail.com",
@@ -20,9 +21,9 @@ export const site = {
     close: "5:00 PM",
     schema: "Mo-Sa 08:00-17:00",
   },
-  rating: { value: 5.0, count: 30 },
+  rating: { value: 5.0, count: 47 },
   social: {
-    google: "https://www.google.com/search?q=Union+Park+Landscaping+Wilmington+DE",
+    google: "https://www.google.com/search?q=Union+Park+Landscaping+Wilmington+DE+reviews",
   },
   /** Sister brand linked from the trailer QR chooser at `/`. */
   sisterBrand: {
@@ -50,7 +51,7 @@ export const services: ServiceDef[] = [
     name: "Landscape Design & Installation",
     short: "Landscape Design",
     blurb:
-      "Custom planting plans, garden beds, trees, and shrubs designed for Delaware's climate — installed right the first time.",
+      "Custom planting plans, garden beds, trees, and shrubs designed for Delaware's climate, installed right the first time.",
   },
   {
     slug: "hardscaping",
@@ -71,7 +72,7 @@ export const services: ServiceDef[] = [
     name: "Fence Installation",
     short: "Fencing",
     blurb:
-      "Wood, vinyl, and aluminum fencing installed straight, plumb, and to code — for privacy, pets, and curb appeal.",
+      "Wood, vinyl, and aluminum fencing installed straight, plumb, and to code, for privacy, pets, and curb appeal.",
   },
   {
     slug: "yard-cleanups",

@@ -38,7 +38,7 @@ export function ContactForm() {
       <div className="card border-pine-500/40 bg-pine-50 p-8 text-center">
         <p className="font-display text-2xl font-semibold text-pine-900">Request received ✓</p>
         <p className="mt-2 text-ink-soft">
-          Thanks — we&apos;ll get back to you shortly, usually within one business day.
+          Thanks. We&apos;ll get back to you shortly, usually within one business day.
           Need us sooner? Call{" "}
           <a href={site.phoneHref} className="font-semibold text-pine-800 underline">
             {site.phone}

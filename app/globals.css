@@ -1,41 +1,46 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette: Miami blue (primary) + hot pink (accent) + cool neutrals.
-     Token names kept so existing utility classes still resolve. */
+  /*
+    Color theory: analogous leaf greens for the page, logo pink + Miami cyan
+    as accents only (CTA / links) — not both fighting in every headline.
+  */
 
-  --color-pine-950: #062733;
-  --color-pine-900: #093544;
-  --color-pine-800: #0c4c5f;
-  --color-pine-700: #0f6884;
-  --color-pine-600: #1489a8;
-  --color-pine-500: #17aacb;
-  --color-pine-100: #cfeef7;
-  --color-pine-50: #ecf8fc;
+  /* Forest structure (analogous greens) */
+  --color-pine-950: #1a2e24;
+  --color-pine-900: #24382e;
+  --color-pine-800: #2f4a3c;
+  --color-pine-700: #0e7a96;
+  --color-pine-600: #17aacb;
+  --color-pine-500: #3bb8d4;
+  --color-pine-100: #e2ebe0;
+  --color-pine-50: #f3f6f0;
 
-  --color-moss-600: #5a7581;
-  --color-moss-400: #90a8b1;
-  --color-moss-200: #cbdce1;
+  --color-moss-600: #5a7354;
+  --color-moss-400: #8a9f7c;
+  --color-moss-200: #c8d4bc;
 
-  --color-cream: #f4f8fa;
-  --color-sand-100: #eef4f6;
-  --color-sand-200: #dde8ec;
-  --color-sand-300: #c5d5dc;
+  /* Warm paper — soft, not icy */
+  --color-cream: #f6f4ee;
+  --color-sand-100: #ebe8e0;
+  --color-sand-200: #d9d4c8;
+  --color-sand-300: #c2bbad;
 
+  /* Logo pink — primary CTA only */
   --color-clay-700: #b3126a;
   --color-clay-600: #dd1a83;
-  --color-clay-500: #f23f9c;
-  --color-clay-100: #fbdcee;
+  --color-clay-500: #e84d9a;
+  --color-clay-100: #f9e4ef;
 
-  --color-ink: #0e2730;
-  --color-ink-soft: #4a6570;
+  --color-ink: #1e2c24;
+  --color-ink-soft: #4f5e54;
 
-  /* All-sans stack (Nunito Sans — shared with Annie's body type) */
   --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-lift: 0 14px 32px -18px rgb(6 39 51 / 0.28);
-  --shadow-card: 0 1px 0 rgb(6 39 51 / 0.04), 0 8px 24px -16px rgb(6 39 51 / 0.18);
+  --shadow-lift: 0 14px 32px -14px rgb(26 46 36 / 0.28);
+  --shadow-card: 0 1px 0 rgb(26 46 36 / 0.04), 0 8px 24px -16px rgb(26 46 36 / 0.18);
+  --shadow-pink: 0 10px 22px -10px rgb(221 26 131 / 0.28);
 }
 
 html {
@@ -44,11 +49,14 @@ html {
 }
 
 body {
-  background: var(--color-cream);
+  background-color: var(--color-cream);
+  background-image: url("/art/leaf-texture.svg");
+  background-size: 280px;
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  font-weight: 400;
+  line-height: 1.65;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -61,43 +69,44 @@ body {
   .btn-primary,
   .btn-secondary,
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-800;
   }
   .btn-primary {
-    @apply bg-clay-600 text-white hover:bg-clay-700 hover:-translate-y-0.5 shadow-lift;
+    @apply bg-clay-600 text-white hover:bg-clay-700 hover:-translate-y-0.5;
+    box-shadow: var(--shadow-pink);
   }
   .btn-secondary {
-    @apply bg-pine-800 text-white hover:bg-pine-900 hover:-translate-y-0.5;
+    @apply bg-pine-800 text-white hover:bg-pine-900 hover:-translate-y-0.5 shadow-lift;
   }
   .btn-ghost {
-    @apply border border-pine-800/20 bg-white text-pine-900 hover:border-pine-800/50 hover:bg-pine-50;
+    @apply border-[1.5px] border-pine-800/20 bg-white text-pine-900 hover:border-pine-800 hover:bg-pine-50;
   }
 
   .heading-display {
-    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950;
-    line-height: 1.08;
+    @apply font-sans font-bold tracking-[-0.02em] text-pine-950;
+    line-height: 1.12;
   }
 
   .eyebrow {
-    @apply text-[11px] font-extrabold uppercase tracking-[0.14em] text-clay-600;
+    @apply text-[11px] font-extrabold uppercase tracking-[0.18em] text-moss-600;
   }
 
   .card {
-    @apply rounded-xl border border-sand-200 bg-white shadow-card;
+    @apply rounded-2xl border border-sand-200 bg-white shadow-card;
   }
 
   .section-y {
-    @apply py-12 sm:py-16;
+    @apply py-14 sm:py-20 lg:py-24;
   }
 
   .prose-site {
     @apply text-[1.05rem] leading-relaxed text-ink-soft;
   }
   .prose-site h2 {
-    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950 mt-9 mb-3 text-2xl sm:text-[1.75rem];
+    @apply font-sans font-bold tracking-[-0.02em] text-pine-950 mt-9 mb-3 text-2xl sm:text-[1.75rem];
   }
   .prose-site h3 {
-    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950 mt-7 mb-2 text-xl;
+    @apply font-sans font-bold tracking-[-0.02em] text-pine-950 mt-7 mb-2 text-xl;
   }
   .prose-site p {
     @apply my-3.5;
@@ -115,18 +124,30 @@ body {
     @apply font-bold text-pine-700 underline underline-offset-4 hover:text-pine-900;
   }
   .prose-site strong {
-    @apply font-extrabold text-pine-950;
+    @apply font-bold text-pine-950;
   }
   .prose-site table {
-    @apply my-6 w-full border-collapse overflow-hidden rounded-lg text-sm;
+    @apply my-6 w-full border-collapse overflow-hidden rounded-xl text-sm;
   }
   .prose-site th {
-    @apply border border-sand-200 bg-pine-50 px-3 py-2 text-left font-extrabold text-pine-950;
+    @apply border border-sand-200 bg-pine-50 px-3 py-2 text-left font-bold text-pine-950;
   }
   .prose-site td {
     @apply border border-sand-200 bg-white px-3 py-2;
   }
   .prose-site blockquote {
-    @apply my-6 border-l-4 border-pine-500 bg-pine-50 px-5 py-3 text-pine-900;
+    @apply my-6 border-l-4 border-pine-600 bg-pine-50 px-5 py-3 text-pine-900;
+  }
+}
+
+/* Hide page sticky CTA while the mobile menu is open */
+body.menu-open .mobile-sticky-cta {
+  display: none;
+}
+
+/* Reserve space only while the scroll-gated sticky CTA is visible */
+@media (max-width: 767px) {
+  body.sticky-cta-on #main {
+    padding-bottom: 5.5rem;
   }
 }

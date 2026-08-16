@@ -8,6 +8,7 @@ import { townContent, getTown } from "@/content/towns";
 import { getService } from "@/content/services";
 import { site } from "@/lib/site";
 import { photos } from "@/lib/photos";
+import { getGoogleReviews } from "@/lib/google-reviews";
 
 export function generateStaticParams() {
   return townContent.map((t) => ({ slug: t.slug }));
@@ -40,6 +41,8 @@ export default async function TownPage({
   const popular = town.popularServices
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
+  const googleReviews = await getGoogleReviews();
 
   return (
     <>
@@ -117,7 +120,7 @@ export default async function TownPage({
         faqs={town.faqs}
         title={`${town.name} homeowners ask us…`}
       />
-      <Testimonials />
+      <Testimonials data={googleReviews} />
       <CtaSection title={`Get your free ${town.name} estimate`} />
     </>
   );

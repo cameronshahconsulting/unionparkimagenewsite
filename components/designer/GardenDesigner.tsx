@@ -22,14 +22,16 @@ export function GardenDesigner({
   lockGarden?: boolean;
 } = {}) {
   return (
-    <ToastProvider>
-      <CartProvider>
-        <Designer
-          designId={designId}
-          initialGardenSlug={initialGardenSlug}
-          lockGarden={lockGarden}
-        />
-      </CartProvider>
-    </ToastProvider>
+    <div className="annies-designer">
+      <ToastProvider>
+        <CartProvider>
+          <Designer
+            designId={designId}
+            initialGardenSlug={initialGardenSlug}
+            lockGarden={lockGarden}
+          />
+        </CartProvider>
+      </ToastProvider>
+    </div>
   );
 }

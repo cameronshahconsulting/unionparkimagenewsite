@@ -18,7 +18,7 @@ export default function DesignerPage() {
           Design it. We&apos;ll install it.
         </h1>
         <p className="mt-3 max-w-2xl text-ink-soft">
-          Same garden designer as {site.sisterBrand.name} — plants from their stock, installation
+          Same garden designer as {site.sisterBrand.name}. Plants from their stock, installation
           quoted by Union Park. When you&apos;re ready, open the full plant cart on Annie&apos;s.
         </p>
         <div className="mt-8 overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-card">
