@@ -14,12 +14,12 @@ export function TrustBar() {
     { stat: "24hr", label: "Typical estimate turnaround" },
   ];
   return (
-    <section aria-label="Why homeowners choose us" className="border-y border-sand-200 bg-white">
-      <div className="container-site grid grid-cols-2 gap-5 py-7 sm:grid-cols-4 sm:gap-6 sm:py-8">
+    <section aria-label="Why homeowners choose us" className="bg-pine-950 text-white">
+      <div className="container-site grid grid-cols-2 gap-6 py-8 sm:grid-cols-4 sm:gap-8 sm:py-9">
         {items.map((i) => (
           <div key={i.label} className="text-center sm:text-left">
-            <p className="text-2xl font-extrabold tracking-tight text-pine-800 sm:text-3xl">{i.stat}</p>
-            <p className="mt-1 text-xs font-semibold leading-snug text-ink-soft sm:text-sm">{i.label}</p>
+            <p className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">{i.stat}</p>
+            <p className="mt-1 text-xs font-semibold leading-snug text-pine-100/80 sm:text-sm">{i.label}</p>
           </div>
         ))}
       </div>
@@ -50,7 +50,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="section-y bg-pine-50">
+    <section className="section-y">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow>5.0 stars on Google</Eyebrow>
@@ -58,16 +58,16 @@ export function Testimonials() {
             Neighbors trust us with their yards
           </h2>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
+        <div className="mt-10 grid gap-8 border-t border-sand-200 pt-10 md:grid-cols-3 md:gap-10">
           {testimonials.map((t) => (
-            <figure key={t.quote} className="card p-5 sm:p-6">
-              <div className="text-sm text-clay-500" aria-label="5 out of 5 stars">
+            <figure key={t.quote}>
+              <div className="text-sm text-pine-600" aria-label="5 out of 5 stars">
                 {"★★★★★"}
               </div>
-              <blockquote className="mt-2.5 text-[0.95rem] leading-relaxed text-ink">
+              <blockquote className="mt-3 text-[1.05rem] leading-relaxed text-ink">
                 “{t.quote}”
               </blockquote>
-              <figcaption className="mt-3.5 text-sm font-bold text-ink-soft">
+              <figcaption className="mt-4 text-sm font-bold text-ink-soft">
                 {t.name} · {t.town}
               </figcaption>
             </figure>
@@ -132,7 +132,7 @@ export function CtaSection({
           <Link href="/contact" className="btn-primary">
             Get My Free Estimate
           </Link>
-          <a href={site.phoneHref} className="btn-ghost !border-white/30 !bg-white/10 !text-white hover:!bg-white/20">
+          <a href={site.phoneHref} className="btn-on-dark">
             Call {site.phone}
           </a>
         </div>

@@ -62,7 +62,7 @@ export function Footer() {
             <li><Link href="/gallery" className="hover:text-white hover:underline">Project Gallery</Link></li>
             <li><Link href="/blog" className="hover:text-white hover:underline">Landscaping Blog</Link></li>
             <li><Link href="/contact" className="hover:text-white hover:underline">Free Estimate</Link></li>
-            <li><Link href="/home/#visualizer" className="hover:text-white hover:underline">AI Yard Visualizer</Link></li>
+            <li><Link href="/home/#visualizer" className="hover:text-white hover:underline">Yard Designer</Link></li>
             <li>
               <a
                 href={site.sisterBrand.url}
@@ -70,7 +70,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-white hover:underline"
               >
-                {site.sisterBrand.name} ↗
+                Plant shop · {site.sisterBrand.short} ↗
               </a>
             </li>
           </ul>

@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/SiteChrome";
 import { JsonLd, localBusinessJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
 
-/** Same sans family Annie's uses for body — keeps the two brands feeling related. */
-const nunito = Nunito_Sans({
-  variable: "--font-nunito",
+/** Clean commercial sans — strong, non-generic, fits a conversion landscaping brand. */
+const outfit = Outfit({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${nunito.variable} h-full antialiased`}>
+    <html lang="en" className={`${outfit.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <JsonLd data={localBusinessJsonLd()} />
         <SiteChrome>{children}</SiteChrome>

@@ -1,40 +1,39 @@
-/* Annie's designer stylesheet (imported) */
-/* Annie's Online Nursery — design system (from the brand pack) */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Dancing+Script:wght@600;700&family=Nunito+Sans:wght@400;600;700;800;900&display=swap');
+/* Union Park Landscaping — yard designer styles (scoped; no global body overrides) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root{
-  --cream:#FFFBF1;--paper:#FEF6E4;--sun:#FDF4CE;--yel:#FCE79A;--gold:#F6D46B;
-  --pink:#F7C0D0;--pinkd:#EFA0B6;--petal:#FBDEE7;
-  --sprout:#6E8B5B;--sproutl:#8CA877;--fern:#3B4A32;--fernd:#2c3826;
-  --cedar:#B5885B;--cedard:#94693F;--bark:#33291F;
-  --serif:'Fraunces',Georgia,serif;--script:'Dancing Script',cursive;--sans:'Nunito Sans',system-ui,sans-serif;
+  --cream:#f5f8f6;--paper:#eef8f2;--sun:#d4f0e0;--yel:#a8e0c0;--gold:#22b56c;
+  --pink:#fbdcee;--pinkd:#dd1a83;--petal:#fde8f3;
+  --sprout:#157a4a;--sproutl:#1a9a5c;--fern:#0a3a26;--fernd:#062418;
+  --cedar:#4d6b5c;--cedard:#3d5648;--bark:#10241a;
+  --serif:'Outfit',system-ui,sans-serif;--script:'Outfit',system-ui,sans-serif;--sans:'Outfit',system-ui,sans-serif;
   --maxw:1220px;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{font-family:var(--sans);color:var(--bark);background:var(--cream) url('/art/leaf-texture.svg');background-size:260px;line-height:1.6;-webkit-font-smoothing:antialiased}
-h1,h2,h3,h4{font-family:var(--serif);color:var(--fern);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:0}
-p{margin:0}
-/* bare anchor reset — keeps button classes winning on color */
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
+.designer-v2,.tool{font-family:var(--sans);color:var(--bark);line-height:1.6;-webkit-font-smoothing:antialiased}
+.designer-v2 h1,.designer-v2 h2,.designer-v2 h3,.designer-v2 h4,
+.tool h1,.tool h2,.tool h3,.tool h4{font-family:var(--sans);color:var(--fern);font-weight:700;line-height:1.08;letter-spacing:-.02em;margin:0}
+.designer-v2 p,.tool p{margin:0}
+/* bare anchor reset inside designer only */
+.designer-v2 a,.tool a{color:inherit;text-decoration:none}
+.designer-v2 img,.tool img{max-width:100%;display:block}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(24px,5vw,48px)}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:var(--sprout);margin:0 0 12px}
-.script{font-family:var(--script)}
+.designer-v2 .eyebrow,.tool .eyebrow{font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--sprout);margin:0 0 12px}
+.script{font-family:var(--sans);font-weight:800}
 
 /* ---------- BUTTONS (high contrast, brand colors) ---------- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:800;font-size:15px;padding:14px 26px;border-radius:999px;border:0;cursor:pointer;white-space:nowrap;flex:0 0 auto;transition:transform .16s,box-shadow .16s,background .16s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--sans);font-weight:800;font-size:15px;padding:14px 26px;border-radius:8px;border:0;cursor:pointer;white-space:nowrap;flex:0 0 auto;transition:transform .16s,box-shadow .16s,background .16s}
 .btn:disabled,.btn.is-disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important;filter:grayscale(.25)}
 .btn.btn-primary:disabled,.btn.btn-primary.is-disabled{background:#c9c2b0;color:#6b6252}
 .btn:focus-visible{outline:3px solid var(--fern);outline-offset:3px}
 .skip-link{position:absolute;left:12px;top:-60px;z-index:1000;background:var(--fern);color:var(--cream);font-weight:800;padding:10px 18px;border-radius:8px;text-decoration:none;transition:top .15s}
 .skip-link:focus{top:12px}
-.btn.btn-primary{background:var(--gold);color:var(--fernd)}
-.btn.btn-primary:hover{transform:translateY(-2px);background:var(--yel);box-shadow:0 12px 26px rgba(59,74,50,.22)}
-.btn.btn-fern{background:var(--fern);color:var(--cream)}
-.btn.btn-fern:hover{transform:translateY(-2px);background:var(--fernd);box-shadow:0 12px 26px rgba(44,56,38,.32)}
+.btn.btn-primary{background:var(--pinkd);color:#fff}
+.btn.btn-primary:hover{transform:translateY(-1px);background:#b3126a;box-shadow:0 12px 26px rgba(6,36,24,.18)}
+.btn.btn-fern{background:var(--fern);color:#fff}
+.btn.btn-fern:hover{transform:translateY(-1px);background:var(--fernd);box-shadow:0 12px 26px rgba(6,36,24,.28)}
 .btn.btn-outline{background:transparent;color:var(--fern);border:1.6px solid var(--fern)}
-.btn.btn-outline:hover{transform:translateY(-2px);background:var(--fern);color:var(--cream)}
+.btn.btn-outline:hover{transform:translateY(-1px);background:var(--fern);color:#fff}
 .ai .btn.btn-outline{color:var(--cream);border-color:rgba(255,251,241,.72);background:rgba(255,251,241,.08)}
 .ai .btn.btn-outline:hover{background:var(--cream);color:var(--fern);border-color:var(--cream)}
 .btn.btn-white{background:#fff;color:var(--fern);border:1.5px solid rgba(59,74,50,.2)}

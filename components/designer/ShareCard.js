@@ -3,22 +3,19 @@
 import { useCallback, useRef, useState } from "react";
 
 /**
- * The thing she texts to the group chat.
- *
- * A 1080×1920 story card drawn on canvas: her real yard on top, the full-bloom
- * render below, Annie's mark at the bottom. Both images are same-origin (or
- * data URLs), so the canvas never taints and the download always works.
+ * Story card for group chat: before photo on top, full-bloom render below,
+ * Union Park mark at the bottom.
  */
 
 const W = 1080;
 const H = 1920;
 
-const CREAM = "#FFFBF1";
-const FERN = "#3B4A32";
-const FERN_D = "#2C3826";
-const SPROUT = "#6E8B5B";
-const GOLD = "#F6D46B";
-const CEDAR = "#94693F";
+const CREAM = "#f5f8f6";
+const FERN = "#0a3a26";
+const FERN_D = "#062418";
+const SPROUT = "#157a4a";
+const ACCENT = "#dd1a83";
+const CEDAR = "#4d6b5c";
 
 function loadImage(src) {
   return new Promise((resolve) => {
@@ -34,7 +31,7 @@ function loadImage(src) {
 /** object-fit: cover, in canvas. */
 function drawCover(ctx, img, x, y, w, h) {
   if (!img) {
-    ctx.fillStyle = "#E7EFD9";
+    ctx.fillStyle = "#d4f0e0";
     ctx.fillRect(x, y, w, h);
     return;
   }
@@ -60,10 +57,10 @@ function roundRect(ctx, x, y, w, h, r) {
 }
 
 function pill(ctx, text, x, y) {
-  ctx.font = "700 30px 'Nunito Sans', system-ui, sans-serif";
+  ctx.font = "700 30px Outfit, system-ui, sans-serif";
   const w = ctx.measureText(text).width + 52;
-  ctx.fillStyle = "rgba(20,28,16,.72)";
-  roundRect(ctx, x, y, w, 60, 30);
+  ctx.fillStyle = "rgba(6,36,24,.78)";
+  roundRect(ctx, x, y, w, 60, 8);
   ctx.fill();
   ctx.fillStyle = CREAM;
   ctx.textBaseline = "middle";
@@ -103,23 +100,21 @@ export default function ShareCard({
     const pad = 56;
     const imgW = W - pad * 2;
 
-    // ---- header ----
     ctx.textBaseline = "alphabetic";
     ctx.fillStyle = SPROUT;
-    ctx.font = "800 26px 'Nunito Sans', system-ui, sans-serif";
+    ctx.font = "800 26px Outfit, system-ui, sans-serif";
     ctx.letterSpacing = "6px";
     ctx.fillText("MY YARD, PLANNED", pad, 112);
     ctx.letterSpacing = "0px";
 
     ctx.fillStyle = FERN;
-    ctx.font = "600 76px Fraunces, Georgia, serif";
+    ctx.font = "800 76px Outfit, system-ui, sans-serif";
     ctx.fillText("Before & after", pad, 200);
 
-    // ---- the two photos ----
     const topY = 262;
     const topH = 560;
     ctx.save();
-    roundRect(ctx, pad, topY, imgW, topH, 28);
+    roundRect(ctx, pad, topY, imgW, topH, 12);
     ctx.clip();
     drawCover(ctx, before, pad, topY, imgW, topH);
     ctx.restore();
@@ -128,54 +123,49 @@ export default function ShareCard({
     const botY = topY + topH + 28;
     const botH = 760;
     ctx.save();
-    roundRect(ctx, pad, botY, imgW, botH, 28);
+    roundRect(ctx, pad, botY, imgW, botH, 12);
     ctx.clip();
     drawCover(ctx, bloom, pad, botY, imgW, botH);
     ctx.restore();
     pill(ctx, "In full bloom", pad + 28, botY + botH - 88);
 
-    // ---- the plan, in one honest line ----
     let y = botY + botH + 86;
     ctx.fillStyle = FERN;
-    ctx.font = "600 46px Fraunces, Georgia, serif";
+    ctx.font = "700 46px Outfit, system-ui, sans-serif";
     const count = items.reduce((s, i) => s + (i.qty || 0), 0);
     ctx.fillText(`${count} plants · $${Math.round(subtotal).toLocaleString()}`, pad, y);
 
     if (peakMonth) {
       y += 52;
       ctx.fillStyle = CEDAR;
-      ctx.font = "700 32px 'Nunito Sans', system-ui, sans-serif";
+      ctx.font = "700 32px Outfit, system-ui, sans-serif";
       ctx.fillText(`Peak color in ${peakMonth}`, pad, y);
     }
 
-    // ---- Annie's mark ----
     const markY = H - 132;
     ctx.fillStyle = FERN_D;
     roundRect(ctx, 0, H - 232, W, 232, 0);
     ctx.fill();
 
-    ctx.fillStyle = GOLD;
-    ctx.font = "700 66px 'Dancing Script', cursive";
-    ctx.fillText("Annie's", pad, markY);
+    ctx.fillStyle = ACCENT;
+    ctx.font = "800 52px Outfit, system-ui, sans-serif";
+    ctx.fillText("Union Park", pad, markY);
 
-    ctx.fillStyle = "#DCE7CF";
-    ctx.font = "800 22px 'Nunito Sans', system-ui, sans-serif";
-    ctx.letterSpacing = "7px";
-    ctx.fillText("ONLINE NURSERY", pad + 4, markY + 42);
+    ctx.fillStyle = "#d4f0e0";
+    ctx.font = "800 22px Outfit, system-ui, sans-serif";
+    ctx.letterSpacing = "5px";
+    ctx.fillText("LANDSCAPING", pad + 4, markY + 42);
     ctx.letterSpacing = "0px";
 
-    ctx.fillStyle = "rgba(220,231,207,.75)";
-    ctx.font = "600 26px 'Nunito Sans', system-ui, sans-serif";
+    ctx.fillStyle = "rgba(212,240,224,.8)";
+    ctx.font = "600 26px Outfit, system-ui, sans-serif";
     ctx.textAlign = "right";
-    ctx.fillText("Designed with Annie's", W - pad, markY - 14);
-    ctx.fillText("anniesonlinenursery.com", W - pad, markY + 28);
+    ctx.fillText("Designed with UPL", W - pad, markY - 14);
+    ctx.fillText("unionparklandscape.com", W - pad, markY + 28);
     ctx.textAlign = "left";
 
-    // P1-3 / P2-3 — this card can end up on social media detached from the
-    // site, so the disclaimer has to travel with the pixels, not just live
-    // on the page. Small print, still legible.
-    ctx.fillStyle = "rgba(220,231,207,.6)";
-    ctx.font = "600 19px 'Nunito Sans', system-ui, sans-serif";
+    ctx.fillStyle = "rgba(212,240,224,.55)";
+    ctx.font = "600 19px Outfit, system-ui, sans-serif";
     ctx.fillText("AI-generated illustration · not a photograph · Call 811 before you dig", pad, H - 24);
 
     return new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
@@ -187,13 +177,13 @@ export default function ShareCard({
     try {
       const blob = await render();
       if (!blob) throw new Error("no blob");
-      const file = new File([blob], "my-garden-annies.png", { type: "image/png" });
+      const file = new File([blob], "my-garden-upl.png", { type: "image/png" });
 
       if (navigator.canShare?.({ files: [file] })) {
         await navigator.share({
           files: [file],
-          title: "My garden plan from Annie's",
-          text: "Look what my yard could look like 🌿",
+          title: "My garden plan from Union Park Landscaping",
+          text: "Look what my yard could look like",
         });
         setDone("Shared!");
       } else {
@@ -201,7 +191,7 @@ export default function ShareCard({
         urlRef.current = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = urlRef.current;
-        a.download = "my-garden-annies.png";
+        a.download = "my-garden-upl.png";
         a.click();
         setDone("Saved to your photos");
       }

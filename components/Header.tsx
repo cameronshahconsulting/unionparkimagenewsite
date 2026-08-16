@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 
 const nav = [
   { href: "/services", label: "Services" },
-  { href: "/designer", label: "AI Designer" },
+  { href: "/designer", label: "Yard Designer" },
   { href: "/service-areas", label: "Service Areas" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
@@ -20,13 +20,13 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-sand-200 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/85">
-      <div className="container-site flex h-[4.5rem] items-center justify-between gap-4">
+    <header className="sticky top-0 z-50 border-b border-sand-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/90">
+      <div className="container-site flex h-[4.25rem] items-center justify-between gap-4">
         <Link href="/home" aria-label={`${site.name} home`} onClick={() => setOpen(false)} className="min-w-0 shrink">
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
           {nav.map((item) => {
             const active =
               item.href === "/"
@@ -36,7 +36,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-[14.5px] font-bold transition-colors hover:text-pine-700 ${
+                className={`text-[14px] font-semibold transition-colors hover:text-pine-700 ${
                   active ? "text-pine-800" : "text-ink"
                 }`}
               >
@@ -80,7 +80,7 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Mobile"
-          className="border-t border-sand-200 bg-cream px-4 pb-6 pt-3 lg:hidden"
+          className="border-t border-sand-200 bg-white px-4 pb-6 pt-3 lg:hidden"
         >
           <ul className="flex flex-col">
             {nav.map((item) => (

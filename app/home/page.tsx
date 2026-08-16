@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { Scene } from "@/components/Scene";
 import { TrustBar, Testimonials, FaqSection, CtaSection, Eyebrow } from "@/components/Sections";
 import { GardenDesigner } from "@/components/designer/GardenDesigner";
 import { site, services, towns, yearsInBusiness } from "@/lib/site";
@@ -12,15 +12,6 @@ export const metadata: Metadata = {
   description: `Top-rated landscaping company in Wilmington & New Castle County, DE. Patios, drainage, fencing, cleanups, lawn care & landscape design since ${site.foundedYear}. Free estimates — call ${site.phone}.`,
   alternates: { canonical: "/home" },
 };
-
-const sceneByService = {
-  "landscape-design": "garden",
-  hardscaping: "patio",
-  drainage: "drainage",
-  fencing: "fence",
-  "yard-cleanups": "cleanup",
-  "lawn-care": "lawn",
-} as const;
 
 const homeFaqs = [
   {
@@ -36,8 +27,8 @@ const homeFaqs = [
     a: "Yes. We walk your property, talk through what you want, and give you a clear written quote at no cost and with no obligation.",
   },
   {
-    q: "How does the AI yard designer work?",
-    a: "Upload a photo of your yard, pick a vibe and budget, and our designer (powered by Annie's plant catalog) builds a real plant list with season-by-season previews. Love it? Request a free Union Park installation estimate — or open the plant cart on Annie's to buy the plants yourself.",
+    q: "How does the yard designer work?",
+    a: "Upload a photo of your yard, pick a vibe and budget, and our designer builds a real plant list with season-by-season previews. Love it? Request a free Union Park installation estimate — or review the plant list and shop plants separately.",
   },
   {
     q: "How soon can you start my project?",
@@ -52,154 +43,155 @@ const homeFaqs = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="container-site grid items-center gap-8 py-10 sm:gap-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
-          <div>
-            <p className="inline-flex items-center gap-2 rounded-lg border border-sand-200 bg-white px-3 py-1.5 text-sm font-bold text-pine-900">
-              <span className="text-clay-500">★★★★★</span> 5.0 on Google · {yearsInBusiness}+ years local
-            </p>
-            <h1 className="heading-display mt-4 text-[2.15rem] sm:text-5xl lg:text-[3.15rem]">
-              Your yard, done right —{" "}
-              <span className="text-pine-700">and done to last.</span>
-            </h1>
-            <p className="mt-4 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
-              Landscape design, paver patios, drainage fixes, fencing, cleanups, and
-              lawn care for homeowners across {site.address.county}, Delaware.
-              Family-run since {site.foundedYear}. {site.tagline}
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
-                Get a Free Estimate
-              </Link>
-              <a href="#visualizer" className="btn-ghost">
-                Try the AI Yard Designer ↓
-              </a>
-            </div>
-            <p className="mt-3.5 text-sm font-semibold text-ink-soft">
-              Or call{" "}
-              <a href={site.phoneHref} className="font-extrabold text-pine-800 underline underline-offset-4">
-                {site.phone}
-              </a>{" "}
-              — {site.hours.days}, {site.hours.open}–{site.hours.close}
-            </p>
+      {/* Full-bleed conversion hero */}
+      <section className="relative isolate min-h-[min(92vh,820px)] overflow-hidden">
+        <Image
+          src={photos.heroHome}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-pine-950/92 via-pine-900/78 to-pine-900/35"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-pine-950/55 via-transparent to-pine-950/25"
+        />
+
+        <div className="container-site relative flex min-h-[min(92vh,820px)] flex-col justify-end pb-14 pt-28 sm:justify-center sm:pb-20 sm:pt-24">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-pine-100">
+            {site.name}
+          </p>
+          <h1 className="heading-display mt-3 max-w-2xl text-[2.4rem] !text-white sm:text-5xl lg:text-[3.35rem]">
+            Your yard, done right — and done to last.
+          </h1>
+          <p className="mt-4 max-w-lg text-base text-white/85 sm:text-lg">
+            Landscape design, patios, drainage, fencing, cleanups, and lawn care for homeowners
+            across {site.address.county}, DE. Family-run since {site.foundedYear}.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link href="/contact" className="btn-primary">
+              Get a Free Estimate
+            </Link>
+            <a href="#visualizer" className="btn-on-dark">
+              Try the Yard Designer
+            </a>
           </div>
-          <div className="relative">
-            <Scene
-              variant="home"
-              photo={photos.heroHome}
-              alt="Professionally landscaped Delaware home with new plantings, trees, and a walkway"
-              className="aspect-[4/3] w-full rounded-2xl shadow-lift"
-              priority
-            />
-            <div className="absolute -bottom-3 left-5 rounded-lg bg-white px-3.5 py-2.5 shadow-lift">
-              <p className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-soft">Satisfaction</p>
-              <p className="text-lg font-extrabold tracking-tight text-pine-800">100% Guaranteed</p>
-            </div>
-          </div>
+          <p className="mt-5 text-sm font-semibold text-white/75">
+            Or call{" "}
+            <a href={site.phoneHref} className="font-extrabold text-white underline underline-offset-4">
+              {site.phone}
+            </a>{" "}
+            · {site.hours.days}, {site.hours.open}–{site.hours.close}
+          </p>
         </div>
       </section>
 
       <TrustBar />
 
-      {/* AI Garden Designer (Annie's engine · UPL install CTA) */}
-      <section id="visualizer" className="section-y scroll-mt-24">
+      {/* Yard Designer */}
+      <section id="visualizer" className="section-y scroll-mt-24 bg-white">
         <div className="container-site">
           <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Free AI design tool</Eyebrow>
+            <Eyebrow>Free design tool</Eyebrow>
             <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Design your garden — we&apos;ll install it
             </h2>
             <p className="mt-3 text-ink-soft">
-              Same designer as {site.sisterBrand.name}: real in-stock plants, installation-day and
-              full-bloom previews. When you&apos;re happy, get a free Union Park install quote — or{" "}
-              <a
-                href={site.sisterBrand.cartUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-extrabold text-pine-700 underline underline-offset-4"
-              >
-                view the plant cart on Annie&apos;s
-              </a>
-              .
+              Upload a photo, pick a vibe, and get a real plant list with season-by-season
+              previews. When you&apos;re happy, request a free Union Park install quote.
             </p>
           </div>
-          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-card">
+          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-md border border-sand-200 bg-cream shadow-card">
             <GardenDesigner />
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="section-y bg-white">
+      {/* Services — one job: pick a trade */}
+      <section className="section-y">
         <div className="container-site">
           <div className="max-w-2xl">
             <Eyebrow>What we do</Eyebrow>
             <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Six trades. One trusted local crew.
             </h2>
+            <p className="mt-3 text-ink-soft">
+              From weekly lawn care to full patio builds — we handle the outdoor work so you
+              don&apos;t have to juggle contractors.
+            </p>
           </div>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+          <ul className="mt-10 divide-y divide-sand-200 border-y border-sand-200">
             {services.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/services/${s.slug}`}
-                className="card group overflow-hidden transition-shadow hover:shadow-lift"
-              >
-                <Scene
-                  variant={sceneByService[s.slug as keyof typeof sceneByService]}
-                  photo={servicePhotos[s.slug]}
-                  alt={`${s.short} project example`}
-                  className="aspect-[16/9]"
-                />
-                <div className="p-5">
-                  <h3 className="text-lg font-extrabold tracking-tight text-pine-950 group-hover:text-pine-700">
-                    {s.short}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{s.blurb}</p>
-                  <p className="mt-3 text-sm font-extrabold text-clay-600">
-                    Learn more <span aria-hidden>→</span>
-                  </p>
-                </div>
-              </Link>
+              <li key={s.slug}>
+                <Link
+                  href={`/services/${s.slug}`}
+                  className="group grid items-center gap-5 py-5 transition-colors sm:grid-cols-[minmax(0,1fr)_160px] sm:gap-8 sm:py-6"
+                >
+                  <div>
+                    <h3 className="text-xl font-extrabold tracking-tight text-pine-950 group-hover:text-pine-700">
+                      {s.short}
+                    </h3>
+                    <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-[0.95rem]">
+                      {s.blurb}
+                    </p>
+                    <p className="mt-3 text-sm font-extrabold text-clay-600">
+                      Learn more <span aria-hidden>→</span>
+                    </p>
+                  </div>
+                  <div className="relative hidden aspect-[4/3] overflow-hidden rounded-md sm:block">
+                    <Image
+                      src={servicePhotos[s.slug]}
+                      alt=""
+                      fill
+                      sizes="160px"
+                      className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="section-y">
+      {/* What to expect — TruGreen-style numbered path */}
+      <section className="section-y bg-pine-900 text-white">
         <div className="container-site">
           <div className="mx-auto max-w-2xl text-center">
-            <Eyebrow>Simple process</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
-              From phone call to finished yard
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-pine-100">
+              What to expect
+            </p>
+            <h2 className="heading-display mt-2 text-3xl !text-white sm:text-[2.5rem]">
+              From first call to finished yard
             </h2>
           </div>
-          <ol className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
+          <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-10">
             {[
               {
-                n: "1",
+                n: "01",
                 t: "Tell us what you need",
-                d: `Call ${site.phone}, request an estimate online, or send us an AI design you made above. We'll respond fast — often the same day.`,
+                d: `Call ${site.phone}, request an estimate online, or send us a design you made above. We usually respond the same day.`,
               },
               {
-                n: "2",
+                n: "02",
                 t: "Get a clear, free quote",
                 d: "We walk your property, answer questions, and give you a written estimate with no pressure and no surprises.",
               },
               {
-                n: "3",
+                n: "03",
                 t: "We build it right",
                 d: "Our crew shows up on time, does the work to spec, and leaves your property spotless — backed by our satisfaction guarantee.",
               },
             ].map((s) => (
-              <li key={s.n} className="relative rounded-xl border border-sand-200 bg-white p-6 pt-7 shadow-card">
-                <span className="absolute -top-4 left-6 flex h-9 w-9 items-center justify-center rounded-lg bg-pine-800 text-sm font-extrabold text-white">
-                  {s.n}
-                </span>
-                <h3 className="text-lg font-extrabold tracking-tight text-pine-950">{s.t}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{s.d}</p>
+              <li key={s.n}>
+                <p className="text-sm font-extrabold tracking-[0.12em] text-pine-500">{s.n}</p>
+                <h3 className="mt-2 text-xl font-extrabold tracking-tight text-white">{s.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-pine-100/85">{s.d}</p>
               </li>
             ))}
           </ol>
@@ -209,24 +201,24 @@ export default function HomePage() {
       <Testimonials />
 
       {/* Service area */}
-      <section className="section-y">
-        <div className="container-site grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
+      <section className="section-y bg-white">
+        <div className="container-site grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div>
             <Eyebrow>Local &amp; nearby</Eyebrow>
             <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Proudly serving New Castle County
             </h2>
             <p className="mt-3 text-ink-soft">
-              We&apos;re based in Wilmington and work throughout northern Delaware. If
-              you&apos;re in one of these towns, you&apos;re in our service area — and
-              if you&apos;re close, call us anyway.
+              Based in Wilmington and working throughout northern Delaware for {yearsInBusiness}+
+              years. If you&apos;re in one of these towns, you&apos;re in our service area —
+              and if you&apos;re close, call us anyway.
             </p>
-            <ul className="mt-5 flex flex-wrap gap-2">
+            <ul className="mt-6 flex flex-wrap gap-2">
               {towns.map((t) => (
                 <li key={t.slug}>
                   <Link
                     href={`/service-areas/${t.slug}`}
-                    className="inline-block rounded-lg border border-pine-800/20 bg-white px-3.5 py-1.5 text-sm font-bold text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
+                    className="inline-block rounded-md border border-pine-800/20 bg-cream px-3.5 py-1.5 text-sm font-bold text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
                   >
                     {t.name}, DE
                   </Link>
@@ -234,12 +226,15 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <Scene
-            variant="garden"
-            photo={photos.serviceArea}
-            alt="Professionally landscaped garden bed with trees, shrubs, and seasonal flowers"
-            className="aspect-[4/3] w-full rounded-2xl shadow-lift"
-          />
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md">
+            <Image
+              src={photos.serviceArea}
+              alt="Professionally landscaped garden bed with trees, shrubs, and seasonal flowers"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
