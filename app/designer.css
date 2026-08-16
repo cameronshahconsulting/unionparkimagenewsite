@@ -2,10 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root{
-  --cream:#f5f8f6;--paper:#eef8f2;--sun:#d4f0e0;--yel:#a8e0c0;--gold:#22b56c;
+  --cream:#f4f8fa;--paper:#ecf8fc;--sun:#cfeef7;--yel:#9ad8e8;--gold:#17aacb;
   --pink:#fbdcee;--pinkd:#dd1a83;--petal:#fde8f3;
-  --sprout:#157a4a;--sproutl:#1a9a5c;--fern:#0a3a26;--fernd:#062418;
-  --cedar:#4d6b5c;--cedard:#3d5648;--bark:#10241a;
+  --sprout:#1489a8;--sproutl:#17aacb;--fern:#0c4c5f;--fernd:#062733;
+  --cedar:#5a7581;--cedard:#4a6570;--bark:#0e2730;
   --serif:'Outfit',system-ui,sans-serif;--script:'Outfit',system-ui,sans-serif;--sans:'Outfit',system-ui,sans-serif;
   --maxw:1220px;
 }
@@ -29,9 +29,9 @@
 .skip-link{position:absolute;left:12px;top:-60px;z-index:1000;background:var(--fern);color:var(--cream);font-weight:800;padding:10px 18px;border-radius:8px;text-decoration:none;transition:top .15s}
 .skip-link:focus{top:12px}
 .btn.btn-primary{background:var(--pinkd);color:#fff}
-.btn.btn-primary:hover{transform:translateY(-1px);background:#b3126a;box-shadow:0 12px 26px rgba(6,36,24,.18)}
+.btn.btn-primary:hover{transform:translateY(-1px);background:#b3126a;box-shadow:0 12px 26px rgba(6,39,51,.18)}
 .btn.btn-fern{background:var(--fern);color:#fff}
-.btn.btn-fern:hover{transform:translateY(-1px);background:var(--fernd);box-shadow:0 12px 26px rgba(6,36,24,.28)}
+.btn.btn-fern:hover{transform:translateY(-1px);background:var(--fernd);box-shadow:0 12px 26px rgba(6,39,51,.28)}
 .btn.btn-outline{background:transparent;color:var(--fern);border:1.6px solid var(--fern)}
 .btn.btn-outline:hover{transform:translateY(-1px);background:var(--fern);color:#fff}
 .ai .btn.btn-outline{color:var(--cream);border-color:rgba(255,251,241,.72);background:rgba(255,251,241,.08)}

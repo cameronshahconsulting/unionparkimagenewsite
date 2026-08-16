@@ -43,8 +43,8 @@ const homeFaqs = [
 export default function HomePage() {
   return (
     <>
-      {/* Full-bleed conversion hero */}
-      <section className="relative isolate min-h-[min(92vh,820px)] overflow-hidden">
+      {/* Full-bleed hero — UPL cyan/pink atmosphere over real yard photo */}
+      <section className="relative isolate min-h-[min(88vh,780px)] overflow-hidden">
         <Image
           src={photos.heroHome}
           alt=""
@@ -55,19 +55,24 @@ export default function HomePage() {
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-r from-pine-950/92 via-pine-900/78 to-pine-900/35"
+          className="absolute inset-0 bg-gradient-to-r from-pine-950/90 via-pine-900/72 to-pine-800/25"
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-pine-950/55 via-transparent to-pine-950/25"
+          className="absolute inset-0 bg-gradient-to-tr from-clay-600/20 via-transparent to-pine-500/25"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-pine-950/50 via-transparent to-transparent"
         />
 
-        <div className="container-site relative flex min-h-[min(92vh,820px)] flex-col justify-end pb-14 pt-28 sm:justify-center sm:pb-20 sm:pt-24">
-          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-white sm:text-base">
+        <div className="container-site relative flex min-h-[min(88vh,780px)] flex-col justify-end pb-14 pt-28 sm:justify-center sm:pb-20 sm:pt-24">
+          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-pine-100 sm:text-base">
             {site.name}
           </p>
           <h1 className="heading-display mt-3 max-w-2xl text-[2.4rem] !text-white sm:text-5xl lg:text-[3.35rem]">
-            Your yard, done right — and done to last.
+            Your yard, done right —{" "}
+            <span className="text-pine-100">and done to last.</span>
           </h1>
           <p className="mt-4 max-w-lg text-base text-white/85 sm:text-lg">
             Landscape design, patios, drainage, fencing, cleanups, and lawn care for homeowners
@@ -106,7 +111,7 @@ export default function HomePage() {
               previews. When you&apos;re happy, request a free Union Park install quote.
             </p>
           </div>
-          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-md border border-sand-200 bg-cream shadow-card">
+          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-xl border border-sand-200 bg-white shadow-card">
             <GardenDesigner />
           </div>
         </div>
@@ -143,7 +148,7 @@ export default function HomePage() {
                       Learn more <span aria-hidden>→</span>
                     </p>
                   </div>
-                  <div className="relative hidden aspect-[4/3] overflow-hidden rounded-md sm:block">
+                  <div className="relative hidden aspect-[4/3] overflow-hidden rounded-xl sm:block">
                     <Image
                       src={servicePhotos[s.slug]}
                       alt=""
@@ -159,14 +164,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* What to expect — TruGreen-style numbered path */}
-      <section className="section-y bg-pine-900 text-white">
+      {/* Simple process */}
+      <section className="section-y bg-pine-50">
         <div className="container-site">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-pine-100">
-              What to expect
-            </p>
-            <h2 className="heading-display mt-2 text-3xl !text-white sm:text-[2.5rem]">
+            <Eyebrow>Simple process</Eyebrow>
+            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               From first call to finished yard
             </h2>
           </div>
@@ -189,9 +192,9 @@ export default function HomePage() {
               },
             ].map((s) => (
               <li key={s.n}>
-                <p className="text-sm font-extrabold tracking-[0.12em] text-pine-500">{s.n}</p>
-                <h3 className="mt-2 text-xl font-extrabold tracking-tight text-white">{s.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-pine-100/85">{s.d}</p>
+                <p className="text-sm font-extrabold tracking-[0.12em] text-clay-600">{s.n}</p>
+                <h3 className="mt-2 text-xl font-extrabold tracking-tight text-pine-950">{s.t}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.d}</p>
               </li>
             ))}
           </ol>
@@ -218,7 +221,7 @@ export default function HomePage() {
                 <li key={t.slug}>
                   <Link
                     href={`/service-areas/${t.slug}`}
-                    className="inline-block rounded-md border border-pine-800/20 bg-cream px-3.5 py-1.5 text-sm font-bold text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
+                className="inline-block rounded-xl border border-pine-800/20 bg-white px-3.5 py-1.5 text-sm font-bold text-pine-900 transition-colors hover:border-pine-600 hover:bg-pine-50"
                   >
                     {t.name}, DE
                   </Link>
@@ -226,7 +229,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-md">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
             <Image
               src={photos.serviceArea}
               alt="Professionally landscaped garden bed with trees, shrubs, and seasonal flowers"

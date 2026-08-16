@@ -21,7 +21,7 @@ export default function DesignerPage() {
           Upload a photo of your yard, pick a vibe and budget, and get a plant list with
           season-by-season previews. When you&apos;re ready, request a free Union Park install quote.
         </p>
-        <div className="mt-8 overflow-hidden rounded-md border border-sand-200 bg-cream shadow-card">
+        <div className="mt-8 overflow-hidden rounded-xl border border-sand-200 bg-white shadow-card">
           <GardenDesigner />
         </div>
       </div>

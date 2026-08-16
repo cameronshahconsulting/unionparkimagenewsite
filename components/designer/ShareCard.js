@@ -10,12 +10,12 @@ import { useCallback, useRef, useState } from "react";
 const W = 1080;
 const H = 1920;
 
-const CREAM = "#f5f8f6";
-const FERN = "#0a3a26";
-const FERN_D = "#062418";
-const SPROUT = "#157a4a";
+const CREAM = "#f4f8fa";
+const FERN = "#0c4c5f";
+const FERN_D = "#062733";
+const SPROUT = "#1489a8";
 const ACCENT = "#dd1a83";
-const CEDAR = "#4d6b5c";
+const CEDAR = "#5a7581";
 
 function loadImage(src) {
   return new Promise((resolve) => {
@@ -31,7 +31,7 @@ function loadImage(src) {
 /** object-fit: cover, in canvas. */
 function drawCover(ctx, img, x, y, w, h) {
   if (!img) {
-    ctx.fillStyle = "#d4f0e0";
+    ctx.fillStyle = "#E7F0F4";
     ctx.fillRect(x, y, w, h);
     return;
   }
@@ -59,7 +59,7 @@ function roundRect(ctx, x, y, w, h, r) {
 function pill(ctx, text, x, y) {
   ctx.font = "700 30px Outfit, system-ui, sans-serif";
   const w = ctx.measureText(text).width + 52;
-  ctx.fillStyle = "rgba(6,36,24,.78)";
+  ctx.fillStyle = "rgba(6,39,51,.78)";
   roundRect(ctx, x, y, w, 60, 8);
   ctx.fill();
   ctx.fillStyle = CREAM;
@@ -151,20 +151,20 @@ export default function ShareCard({
     ctx.font = "800 52px Outfit, system-ui, sans-serif";
     ctx.fillText("Union Park", pad, markY);
 
-    ctx.fillStyle = "#d4f0e0";
+    ctx.fillStyle = "#cfeef7";
     ctx.font = "800 22px Outfit, system-ui, sans-serif";
     ctx.letterSpacing = "5px";
     ctx.fillText("LANDSCAPING", pad + 4, markY + 42);
     ctx.letterSpacing = "0px";
 
-    ctx.fillStyle = "rgba(212,240,224,.8)";
+    ctx.fillStyle = "rgba(207,238,247,.85)";
     ctx.font = "600 26px Outfit, system-ui, sans-serif";
     ctx.textAlign = "right";
     ctx.fillText("Designed with UPL", W - pad, markY - 14);
     ctx.fillText("unionparklandscape.com", W - pad, markY + 28);
     ctx.textAlign = "left";
 
-    ctx.fillStyle = "rgba(212,240,224,.55)";
+    ctx.fillStyle = "rgba(207,238,247,.55)";
     ctx.font = "600 19px Outfit, system-ui, sans-serif";
     ctx.fillText("AI-generated illustration · not a photograph · Call 811 before you dig", pad, H - 24);
 

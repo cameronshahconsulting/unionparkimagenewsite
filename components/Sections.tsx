@@ -14,12 +14,12 @@ export function TrustBar() {
     { stat: "24hr", label: "Typical estimate turnaround" },
   ];
   return (
-    <section aria-label="Why homeowners choose us" className="bg-pine-950 text-white">
+    <section aria-label="Why homeowners choose us" className="border-y border-sand-200 bg-white">
       <div className="container-site grid grid-cols-2 gap-6 py-8 sm:grid-cols-4 sm:gap-8 sm:py-9">
         {items.map((i) => (
           <div key={i.label} className="text-center sm:text-left">
-            <p className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">{i.stat}</p>
-            <p className="mt-1 text-xs font-semibold leading-snug text-pine-100/80 sm:text-sm">{i.label}</p>
+            <p className="text-2xl font-extrabold tracking-tight text-pine-800 sm:text-3xl">{i.stat}</p>
+            <p className="mt-1 text-xs font-semibold leading-snug text-ink-soft sm:text-sm">{i.label}</p>
           </div>
         ))}
       </div>
@@ -61,7 +61,7 @@ export function Testimonials() {
         <div className="mt-10 grid gap-8 border-t border-sand-200 pt-10 md:grid-cols-3 md:gap-10">
           {testimonials.map((t) => (
             <figure key={t.quote}>
-              <div className="text-sm text-pine-600" aria-label="5 out of 5 stars">
+              <div className="text-sm text-clay-500" aria-label="5 out of 5 stars">
                 {"★★★★★"}
               </div>
               <blockquote className="mt-3 text-[1.05rem] leading-relaxed text-ink">
