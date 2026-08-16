@@ -63,7 +63,7 @@ export default function HomePage() {
         />
 
         <div className="container-site relative flex min-h-[min(92vh,820px)] flex-col justify-end pb-14 pt-28 sm:justify-center sm:pb-20 sm:pt-24">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-pine-100">
+          <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-white sm:text-base">
             {site.name}
           </p>
           <h1 className="heading-display mt-3 max-w-2xl text-[2.4rem] !text-white sm:text-5xl lg:text-[3.35rem]">
