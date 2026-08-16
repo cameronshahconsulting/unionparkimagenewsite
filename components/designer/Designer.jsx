@@ -8,7 +8,6 @@ import { useCart } from "./CartProvider";
 import { GARDENS } from "@/lib/inventory";
 import { downscaleImage } from "@/lib/image";
 import { VIBES, LIFESTYLE, SUN_ASPECTS } from "@/lib/vibes";
-import { IMPACT_PATH, impactPledge } from "@/lib/impact";
 import TimeMachine from "./TimeMachine";
 import BloomRibbon from "./BloomRibbon";
 import ShareCard from "./ShareCard";
@@ -16,17 +15,19 @@ import SwapDrawer from "./SwapDrawer";
 import ToxicityFlag from "./ToxicityFlag";
 import ProgressRing from "./ProgressRing";
 import { EstimateForm } from "@/components/visualizer/EstimateForm";
+import { site } from "@/lib/site";
 
-const ANNIES_URL = "https://anniesonlinenursery.com";
-const ANNIES_CART = `${ANNIES_URL}/cart`;
-const ANNIES_TERMS = `${ANNIES_URL}/designer-terms`;
-const ANNIES_SITE_TERMS = `${ANNIES_URL}/terms`;
-const ANNIES_DESIGNS = `${ANNIES_URL}/designer/mine`;
 
-const EMAIL_KEY = "annies-designer-email";
-const VERIFIED_KEY = "annies-designer-verified";
-const LAST_DESIGN_KEY = "annies-last-design-id";
-const designStorageKey = (id) => `annies-design-${id}`;
+const PLANT_CART_URL = site.sisterBrand.cartUrl;
+const DESIGNER_TERMS = site.sisterBrand.designerTermsUrl;
+const SITE_TERMS = `${site.sisterBrand.url}/terms`;
+const SAVED_DESIGNS = "/designer";
+
+const EMAIL_KEY = "upl-designer-email";
+const VERIFIED_KEY = "upl-designer-verified";
+const LAST_DESIGN_KEY = "upl-last-design-id";
+const designStorageKey = (id) => `upl-design-${id}`;
+const legacyDesignStorageKey = (id) => `annies-design-${id}`;
 
 /** Persist URLs + items for refresh; strip huge data: URLs. */
 function persistDesignLocal(plan) {
@@ -47,7 +48,9 @@ function persistDesignLocal(plan) {
 function loadDesignLocal(id) {
   if (typeof window === "undefined" || !id) return null;
   try {
-    const raw = localStorage.getItem(designStorageKey(id));
+    const raw =
+      localStorage.getItem(designStorageKey(id)) ||
+      localStorage.getItem(legacyDesignStorageKey(id));
     if (!raw) return null;
     const parsed = JSON.parse(raw);
     return parsed && typeof parsed === "object" ? parsed : null;
@@ -56,7 +59,7 @@ function loadDesignLocal(id) {
   }
 }
 
-const inflightKey = (id) => `annies-design-inflight-${id}`;
+const inflightKey = (id) => `upl-design-inflight-${id}`;
 
 /** Typical wait until the first usable Time Machine (plan + truck-day render). */
 const EXPECTED_GEN_MS = 75_000;
@@ -925,25 +928,16 @@ export default function Designer({
         { silent: true }
       );
     });
-    // Prefer Annie's Shopify checkout (real cart with these SKUs). If the list
-    // was edited, open the design on Annie's so they can rebuild the cart there.
+    // Prefer Shopify checkout URL when present; otherwise open the plant cart.
     if (result?.checkoutUrl && !result?.edited) {
-      window.location.href = result.checkoutUrl;
+      window.open(result.checkoutUrl, "_blank", "noopener,noreferrer");
       return;
     }
-    if (result?.id) {
-      window.location.href = `${ANNIES_URL}/designer/d/${result.id}`;
-      return;
-    }
-    window.location.href = ANNIES_CART;
+    window.open(PLANT_CART_URL, "_blank", "noopener,noreferrer");
   };
 
-  const anniesCartHref =
-    result?.checkoutUrl && !result?.edited
-      ? result.checkoutUrl
-      : result?.id
-        ? `${ANNIES_URL}/designer/d/${result.id}`
-        : ANNIES_CART;
+  const plantCartHref =
+    result?.checkoutUrl && !result?.edited ? result.checkoutUrl : PLANT_CART_URL;
 
   const installEstimateDesign = result
     ? {
@@ -956,7 +950,7 @@ export default function Designer({
         breakdown: {
           summary:
             result.designSummary ||
-            "Plant plan generated from Annie's Online Nursery stock for Union Park installation.",
+            "Plant plan generated with the Union Park yard designer for installation.",
           trees: [],
           shrubs: [],
           flowersAndPerennials: (result.items || []).map((i) => ({
@@ -966,12 +960,12 @@ export default function Designer({
           })),
           materials: [
             {
-              item: "Plants sourced via Annie's Online Nursery",
-              estQuantity: `${(result.items || []).reduce((s, i) => s + (i.qty || 0), 0)} plants · see cart on Annie's`,
+              item: "Plants on this design plan",
+              estQuantity: `${(result.items || []).reduce((s, i) => s + (i.qty || 0), 0)} plants · see plant list`,
             },
           ],
           laborNotes:
-            "Customer requested a Union Park Landscaping installation estimate for this Annie's plant plan. Confirm bed size, access, and soil conditions on site.",
+            "Customer requested a Union Park Landscaping installation estimate for this plant plan. Confirm bed size, access, and soil conditions on site.",
         },
       }
     : null;
@@ -1035,8 +1029,8 @@ export default function Designer({
           </p>
           <h2 className="dz-q">Union Park will install this plan</h2>
           <p className="dz-sub">
-            Send your design to our crew for a free, no-obligation install quote. Plants stay
-            available on Annie&apos;s — you can review the full cart there anytime.
+            Send your design to our crew for a free, no-obligation install quote. You can also
+            review the plant list and shop plants separately anytime.
           </p>
         </div>
         <div className="mb-6 grid grid-cols-2 gap-3">
@@ -1065,8 +1059,8 @@ export default function Designer({
         </div>
         <EstimateForm design={installEstimateDesign} onBack={() => setShowInstallEstimate(false)} />
         <p className="mt-6 text-center text-sm">
-          <a className="dz-back-link" href={anniesCartHref} target="_blank" rel="noopener noreferrer">
-            View plant cart on Annie&apos;s ↗
+          <a className="dz-back-link" href={plantCartHref} target="_blank" rel="noopener noreferrer">
+            View plant list ↗
           </a>
         </p>
       </div>
@@ -1192,7 +1186,7 @@ export default function Designer({
           design was generated by AI and has no knowledge of buried gas, electric, water, or
           sewer lines, property boundaries, easements, or HOA rules. It is an idea, not a
           plan — and we are not landscape architects.{" "}
-          <a href={ANNIES_TERMS}>Read the full terms</a>.
+          <a href={DESIGNER_TERMS}>Read the full terms</a>.
         </div>
 
         {/* Plant list + budget */}
@@ -1266,9 +1260,6 @@ export default function Designer({
                 to spend what feels right.
               </p>
             )}
-            <p className="dz-impact-note">
-              <Link href={IMPACT_PATH}>{impactPledge()}</Link>
-            </p>
           </div>
 
           <button
@@ -1280,22 +1271,22 @@ export default function Designer({
           </button>
           <a
             className="btn btn-outline dz-cta"
-            href={anniesCartHref}
+            href={plantCartHref}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {
-              // Still sync local lines so a return visit on Annie's design page is ready.
+              // Sync local cart lines before opening plant checkout.
               if (!result?.checkoutUrl || result?.edited) return;
               e.preventDefault();
               addPlanToCart();
             }}
             style={{ marginTop: 10, textAlign: "center" }}
           >
-            <Cart width="18" height="18" /> View plant cart on Annie&apos;s — {money(subtotal)}
+            <Cart width="18" height="18" /> View plant list — {money(subtotal)}
           </a>
           <p className="dz-sub" style={{ marginTop: 10, textAlign: "center" }}>
-            Plants are fulfilled by {`Annie's Online Nursery`}. Installation is quoted separately by
-            Union Park Landscaping.
+            Installation is quoted separately by Union Park Landscaping. Plant fulfillment is
+            handled through our nursery partner checkout when you shop the list.
           </p>
         </section>
 
@@ -1312,8 +1303,8 @@ export default function Designer({
           Try another vibe / start over
         </button>
         <p style={{ textAlign: "center", marginTop: 10 }}>
-          <a href={ANNIES_DESIGNS} className="dz-back-link" target="_blank" rel="noopener noreferrer">
-            See all your saved designs on Annie&apos;s ↗
+          <a href={SAVED_DESIGNS} className="dz-back-link">
+            Start another design
           </a>
         </p>
         {typeof remaining === "number" ? (
@@ -1674,11 +1665,11 @@ export default function Designer({
                     />
                     <span>
                       <strong>By checking this box I agree</strong> to the{" "}
-                      <a href={ANNIES_TERMS} target="_blank" rel="noopener noreferrer">
+                      <a href={DESIGNER_TERMS} target="_blank" rel="noopener noreferrer">
                         Delivery &amp; Plant Care Terms
                       </a>{" "}
                       and{" "}
-                      <a href={ANNIES_SITE_TERMS} target="_blank" rel="noopener noreferrer">
+                      <a href={SITE_TERMS} target="_blank" rel="noopener noreferrer">
                         Terms of Service
                       </a>
                       . I understand this design is an AI-generated illustration, not a plan or

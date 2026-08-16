@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand palette: Miami blue (primary) + hot pink (accent) + cool neutrals.
+  /* UPL brand: Miami cyan (primary) + hot pink (accent) + cool neutrals.
      Token names kept so existing utility classes still resolve. */
 
   --color-pine-950: #062733;
@@ -30,12 +30,11 @@
   --color-ink: #0e2730;
   --color-ink-soft: #4a6570;
 
-  /* All-sans stack (Nunito Sans — shared with Annie's body type) */
-  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-lift: 0 14px 32px -18px rgb(6 39 51 / 0.28);
-  --shadow-card: 0 1px 0 rgb(6 39 51 / 0.04), 0 8px 24px -16px rgb(6 39 51 / 0.18);
+  --shadow-lift: 0 16px 36px -18px rgb(6 39 51 / 0.32);
+  --shadow-card: 0 1px 0 rgb(6 39 51 / 0.04), 0 8px 24px -16px rgb(6 39 51 / 0.16);
 }
 
 html {
@@ -44,7 +43,10 @@ html {
 }
 
 body {
-  background: var(--color-cream);
+  background:
+    radial-gradient(ellipse 90% 55% at 0% -10%, rgb(23 170 203 / 0.1), transparent 50%),
+    radial-gradient(ellipse 70% 45% at 100% 0%, rgb(221 26 131 / 0.06), transparent 45%),
+    var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -60,8 +62,9 @@ body {
 
   .btn-primary,
   .btn-secondary,
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
+  .btn-ghost,
+  .btn-on-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
   }
   .btn-primary {
     @apply bg-clay-600 text-white hover:bg-clay-700 hover:-translate-y-0.5 shadow-lift;
@@ -72,14 +75,17 @@ body {
   .btn-ghost {
     @apply border border-pine-800/20 bg-white text-pine-900 hover:border-pine-800/50 hover:bg-pine-50;
   }
+  .btn-on-dark {
+    @apply border border-white/45 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20;
+  }
 
   .heading-display {
-    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950;
-    line-height: 1.08;
+    @apply font-sans font-extrabold tracking-[-0.025em] text-pine-950;
+    line-height: 1.05;
   }
 
   .eyebrow {
-    @apply text-[11px] font-extrabold uppercase tracking-[0.14em] text-clay-600;
+    @apply text-[11px] font-extrabold uppercase tracking-[0.16em] text-clay-600;
   }
 
   .card {
@@ -87,7 +93,7 @@ body {
   }
 
   .section-y {
-    @apply py-12 sm:py-16;
+    @apply py-14 sm:py-16;
   }
 
   .prose-site {

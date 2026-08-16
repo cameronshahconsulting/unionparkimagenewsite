@@ -29,17 +29,17 @@ const esc = (s: string) =>
 
 const row = (label: string, value?: string) =>
   value
-    ? `<tr><td style="padding:6px 12px 6px 0;color:#486570;font-size:14px;vertical-align:top;white-space:nowrap"><strong>${label}</strong></td><td style="padding:6px 0;color:#0e2730;font-size:14px">${esc(value)}</td></tr>`
+    ? `<tr><td style="padding:6px 12px 6px 0;color:#4a6570;font-size:14px;vertical-align:top;white-space:nowrap"><strong>${label}</strong></td><td style="padding:6px 0;color:#0e2730;font-size:14px">${esc(value)}</td></tr>`
     : "";
 
 function shell(title: string, inner: string) {
-  return `<!doctype html><html><body style="margin:0;background:#f6fafb;font-family:Arial,Helvetica,sans-serif">
+  return `<!doctype html><html><body style="margin:0;background:#f4f8fa;font-family:Arial,Helvetica,sans-serif">
   <div style="max-width:600px;margin:0 auto;padding:24px 16px">
     <div style="background:#093544;border-radius:12px 12px 0 0;padding:20px 24px">
       <p style="margin:0;color:#cfeef7;font-size:12px;letter-spacing:3px;text-transform:uppercase">Union Park Landscaping</p>
       <h1 style="margin:6px 0 0;color:#fff;font-size:22px">${title}</h1>
     </div>
-    <div style="background:#ffffff;border:1px solid #e0eaee;border-top:none;border-radius:0 0 12px 12px;padding:24px">
+    <div style="background:#ffffff;border:1px solid #dde8ec;border-top:none;border-radius:0 0 12px 12px;padding:24px">
       ${inner}
     </div>
     <p style="color:#90a8b1;font-size:12px;text-align:center;margin-top:16px">${site.name} · ${site.phone} · ${site.email}</p>
@@ -124,25 +124,25 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
         `<table style="border-collapse:collapse">${row("Name", lead.name)}${row("Phone", lead.phone)}${row("Email", lead.email)}${row("Town", lead.town)}${row("Service", lead.service)}</table>
         <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Project details</h2>
         <p style="color:#0e2730;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(lead.message)}</p>
-        <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
+        <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
       ),
     };
   }
 
   return {
-    subject: `🌿 AI design lead — ${lead.name} (${lead.town})`,
+    subject: `Yard design lead — ${lead.name} (${lead.town})`,
     replyTo: lead.email,
     html: shell(
-      "AI Yard Designer lead",
-      `<p style="color:#0e2730;font-size:14px;line-height:1.5">A customer designed their yard with the AI visualizer and wants an estimate. <strong>Their yard photo and chosen design are attached.</strong></p>
+      "Yard Designer lead",
+      `<p style="color:#0e2730;font-size:14px;line-height:1.5">A customer designed their yard with the yard designer and wants an estimate. <strong>Their yard photo and chosen design are attached.</strong></p>
       <table style="border-collapse:collapse">${row("Name", lead.name)}${row("Phone", lead.phone)}${row("Email", lead.email)}${row("Town", lead.town)}${row("Address", lead.address)}</table>
       <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">What they asked for</h2>
       <p style="color:#0e2730;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(lead.request)}</p>
-      ${lead.styles.length ? `<p style="color:#486570;font-size:13px">Style: ${esc(lead.styles.join(", "))}</p>` : ""}
+      ${lead.styles.length ? `<p style="color:#4a6570;font-size:13px">Style: ${esc(lead.styles.join(", "))}</p>` : ""}
       ${lead.notes ? `<h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Customer notes</h2><p style="color:#0e2730;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(lead.notes)}</p>` : ""}
-      <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Estimated takeoff (from AI analysis)</h2>
+      <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Estimated takeoff</h2>
       ${breakdownHtml(lead.breakdown)}
-      <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
+      <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
     ),
     attachments: [
       dataUrlToAttachment(lead.originalPhoto, "yard-original.jpg"),
@@ -154,14 +154,14 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
 export function renderCustomerEmail(lead: VisualizerLead): LeadEmail | null {
   if (!lead.email) return null;
   return {
-    subject: "Your AI yard design — Union Park Landscaping",
+    subject: "Your yard design — Union Park Landscaping",
     toCustomer: lead.email,
     html: shell(
       "We got your design!",
       `<p style="color:#0e2730;font-size:14px;line-height:1.6">Hi ${esc(lead.name.split(" ")[0])},</p>
-      <p style="color:#0e2730;font-size:14px;line-height:1.6">Thanks for trying our AI yard designer — your chosen design is attached to this email. Our team is reviewing it now and will call you at <strong>${esc(lead.phone)}</strong> with a free, no-obligation estimate, usually within one business day.</p>
+      <p style="color:#0e2730;font-size:14px;line-height:1.6">Thanks for trying our yard designer — your chosen design is attached to this email. Our team is reviewing it now and will call you at <strong>${esc(lead.phone)}</strong> with a free, no-obligation estimate, usually within one business day.</p>
       <p style="color:#0e2730;font-size:14px;line-height:1.6">Can't wait? Call us at <a href="${site.phoneHref}" style="color:#0f6884;font-weight:bold">${site.phone}</a> (${site.hours.days}, ${site.hours.open}–${site.hours.close}).</p>
-      <p style="color:#486570;font-size:12px;line-height:1.5">The design is an AI concept preview — your final plan and exact pricing come from our real humans after we see the property.</p>`
+      <p style="color:#4a6570;font-size:12px;line-height:1.5">The design is a concept preview — your final plan and exact pricing come from our crew after we see the property.</p>`
     ),
     attachments: [dataUrlToAttachment(lead.designImage, "your-yard-design.jpg")],
   };

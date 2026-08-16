@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Scene } from "@/components/Scene";
-import { CtaSection, TrustBar, Eyebrow } from "@/components/Sections";
+import { CtaSection, Eyebrow } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { site, yearsInBusiness } from "@/lib/site";
 import { photos } from "@/lib/photos";
@@ -70,8 +70,6 @@ export default function AboutPage() {
           />
         </div>
       </section>
-
-      <TrustBar />
 
       <section className="py-16 sm:py-24">
         <div className="container-site">

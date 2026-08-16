@@ -20,9 +20,9 @@ export default async function DesignPermalinkPage({
         <p className="eyebrow">Saved design</p>
         <h1 className="heading-display mt-2 text-3xl sm:text-4xl">Your garden plan</h1>
         <p className="mt-3 text-ink-soft">
-          Request a Union Park install quote, or open the plant cart on {site.sisterBrand.short}.
+          Request a Union Park install quote, or review the plant list anytime.
         </p>
-        <div className="mt-8 overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-card">
+        <div className="mt-8 overflow-hidden rounded-xl border border-sand-200 bg-white shadow-card">
           <GardenDesigner designId={id} />
         </div>
       </div>

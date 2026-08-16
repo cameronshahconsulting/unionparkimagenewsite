@@ -22,8 +22,8 @@ export function ToastProvider({ children }) {
     ({
       title,
       message,
-      href = "https://anniesonlinenursery.com/cart",
-      linkLabel = "View cart on Annie's",
+      href = "/contact",
+      linkLabel = "Get a free estimate",
     } = {}) => {
       const id = ++idSeq;
       setToasts((list) => [

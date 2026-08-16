@@ -6,12 +6,14 @@ import { friendlyName, displaySize } from "@/lib/plant-visuals";
 import { plantBySku } from "@/lib/inventory";
 
 const Ctx = createContext(null);
-const STORAGE_KEY = "annies-cart-v1";
+const STORAGE_KEY = "upl-cart-v1";
+const LEGACY_STORAGE_KEY = "annies-cart-v1";
 
 function loadCart() {
   if (typeof window === "undefined") return [];
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw =
+      localStorage.getItem(STORAGE_KEY) || localStorage.getItem(LEGACY_STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : [];
     return Array.isArray(parsed) ? parsed : [];
   } catch {

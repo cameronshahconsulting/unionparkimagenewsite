@@ -3,31 +3,30 @@ import Link from "next/link";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Choose a destination | ${site.name} & Annie's Online Nursery`,
-  description: `Scan our trailer QR? Choose Union Park Landscaping for outdoor services, or Annie's Online Nursery for plants delivered across the Delaware Valley.`,
+  title: `Choose a destination | ${site.name}`,
+  description: `Scan our trailer QR? Choose Union Park Landscaping for outdoor services, or ${site.sisterBrand.name} for plants delivered across the Delaware Valley.`,
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
 };
 
 export default function LinkTreePage() {
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden">
-      {/* Atmosphere */}
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-cream">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background: `
             radial-gradient(ellipse 80% 60% at 20% 10%, rgb(20 137 168 / 0.18), transparent 55%),
-            radial-gradient(ellipse 70% 50% at 90% 80%, rgb(221 26 131 / 0.14), transparent 50%),
-            linear-gradient(165deg, #ecf8fc 0%, #f6fafb 45%, #fbdcee 100%)
+            radial-gradient(ellipse 70% 50% at 90% 80%, rgb(221 26 131 / 0.12), transparent 50%),
+            linear-gradient(165deg, #ecf8fc 0%, #f4f8fa 45%, #fbdcee 100%)
           `,
         }}
       />
 
       <div className="relative mx-auto flex w-full max-w-lg flex-1 flex-col justify-center px-5 py-12 sm:px-6">
         <header className="text-center">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.14em] text-pine-700">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-pine-700">
             Welcome
           </p>
           <h1 className="heading-display mt-2.5 text-3xl text-pine-950 sm:text-4xl">
@@ -58,7 +57,7 @@ export default function LinkTreePage() {
               </div>
               <span
                 aria-hidden
-                className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-pine-800 text-base text-white transition group-hover:bg-pine-700"
+                className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-pine-800 text-base text-white transition group-hover:bg-pine-700"
               >
                 →
               </span>
@@ -86,7 +85,7 @@ export default function LinkTreePage() {
               </div>
               <span
                 aria-hidden
-                className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-clay-600 text-base text-white transition group-hover:bg-clay-700"
+                className="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-clay-600 text-base text-white transition group-hover:bg-clay-700"
               >
                 ↗
               </span>

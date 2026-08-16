@@ -11,7 +11,7 @@ const Designer = DesignerImport as ComponentType<{
   lockGarden?: boolean;
 }>;
 
-/** Annie's AI garden designer, wrapped for Union Park (install-first CTAs). */
+/** Union Park AI garden designer — install-first CTAs. */
 export function GardenDesigner({
   designId = null,
   initialGardenSlug = null,
