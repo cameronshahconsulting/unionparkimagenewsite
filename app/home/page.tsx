@@ -54,21 +54,21 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden">
-        <div className="container-site grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="container-site grid items-center gap-8 py-10 sm:gap-10 sm:py-14 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-sand-200 bg-white px-4 py-1.5 text-sm font-medium text-pine-900 shadow-card">
+            <p className="inline-flex items-center gap-2 rounded-lg border border-sand-200 bg-white px-3 py-1.5 text-sm font-bold text-pine-900">
               <span className="text-clay-500">★★★★★</span> 5.0 on Google · {yearsInBusiness}+ years local
             </p>
-            <h1 className="heading-display mt-5 text-4xl leading-[1.08] sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="heading-display mt-4 text-[2.15rem] sm:text-5xl lg:text-[3.15rem]">
               Your yard, done right —{" "}
               <span className="text-pine-700">and done to last.</span>
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-ink-soft">
+            <p className="mt-4 max-w-xl text-[1.05rem] text-ink-soft sm:text-lg">
               Landscape design, paver patios, drainage fixes, fencing, cleanups, and
               lawn care for homeowners across {site.address.county}, Delaware.
               Family-run since {site.foundedYear}. {site.tagline}
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <Link href="/contact" className="btn-primary">
                 Get a Free Estimate
               </Link>
@@ -76,9 +76,9 @@ export default function HomePage() {
                 Try the AI Yard Designer ↓
               </a>
             </div>
-            <p className="mt-4 text-sm text-ink-soft">
+            <p className="mt-3.5 text-sm font-semibold text-ink-soft">
               Or call{" "}
-              <a href={site.phoneHref} className="font-semibold text-pine-800 underline underline-offset-4">
+              <a href={site.phoneHref} className="font-extrabold text-pine-800 underline underline-offset-4">
                 {site.phone}
               </a>{" "}
               — {site.hours.days}, {site.hours.open}–{site.hours.close}
@@ -89,12 +89,12 @@ export default function HomePage() {
               variant="home"
               photo={photos.heroHome}
               alt="Professionally landscaped Delaware home with new plantings, trees, and a walkway"
-              className="aspect-[4/3] w-full rounded-3xl shadow-lift"
+              className="aspect-[4/3] w-full rounded-2xl shadow-lift"
               priority
             />
-            <div className="absolute -bottom-4 left-6 rounded-xl bg-white px-4 py-3 shadow-lift">
-              <p className="text-xs font-semibold uppercase tracking-wider text-ink-soft">Satisfaction</p>
-              <p className="font-display text-xl font-semibold text-pine-800">100% Guaranteed</p>
+            <div className="absolute -bottom-3 left-5 rounded-lg bg-white px-3.5 py-2.5 shadow-lift">
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.12em] text-ink-soft">Satisfaction</p>
+              <p className="text-lg font-extrabold tracking-tight text-pine-800">100% Guaranteed</p>
             </div>
           </div>
         </div>
@@ -103,43 +103,43 @@ export default function HomePage() {
       <TrustBar />
 
       {/* AI Garden Designer (Annie's engine · UPL install CTA) */}
-      <section id="visualizer" className="scroll-mt-24 py-16 sm:py-24">
+      <section id="visualizer" className="section-y scroll-mt-24">
         <div className="container-site">
           <div className="mx-auto max-w-2xl text-center">
             <Eyebrow>Free AI design tool</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Design your garden — we&apos;ll install it
             </h2>
-            <p className="mt-4 text-ink-soft">
+            <p className="mt-3 text-ink-soft">
               Same designer as {site.sisterBrand.name}: real in-stock plants, installation-day and
               full-bloom previews. When you&apos;re happy, get a free Union Park install quote — or{" "}
               <a
                 href={site.sisterBrand.cartUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-pine-700 underline underline-offset-4"
+                className="font-extrabold text-pine-700 underline underline-offset-4"
               >
                 view the plant cart on Annie&apos;s
               </a>
               .
             </p>
           </div>
-          <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-3xl border border-sand-200 bg-white shadow-card">
+          <div className="mx-auto mt-8 max-w-3xl overflow-hidden rounded-2xl border border-sand-200 bg-white shadow-card">
             <GardenDesigner />
           </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="bg-white py-16 sm:py-24">
+      <section className="section-y bg-white">
         <div className="container-site">
           <div className="max-w-2xl">
             <Eyebrow>What we do</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Six trades. One trusted local crew.
             </h2>
           </div>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {services.map((s) => (
               <Link
                 key={s.slug}
@@ -152,12 +152,12 @@ export default function HomePage() {
                   alt={`${s.short} project example`}
                   className="aspect-[16/9]"
                 />
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-semibold text-pine-950 group-hover:text-pine-700">
+                <div className="p-5">
+                  <h3 className="text-lg font-extrabold tracking-tight text-pine-950 group-hover:text-pine-700">
                     {s.short}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.blurb}</p>
-                  <p className="mt-4 text-sm font-semibold text-clay-600">
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{s.blurb}</p>
+                  <p className="mt-3 text-sm font-extrabold text-clay-600">
                     Learn more <span aria-hidden>→</span>
                   </p>
                 </div>
@@ -168,15 +168,15 @@ export default function HomePage() {
       </section>
 
       {/* How it works */}
-      <section className="py-16 sm:py-24">
+      <section className="section-y">
         <div className="container-site">
           <div className="mx-auto max-w-2xl text-center">
             <Eyebrow>Simple process</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               From phone call to finished yard
             </h2>
           </div>
-          <ol className="mt-12 grid gap-8 md:grid-cols-3">
+          <ol className="mt-10 grid gap-5 md:grid-cols-3 md:gap-6">
             {[
               {
                 n: "1",
@@ -194,12 +194,12 @@ export default function HomePage() {
                 d: "Our crew shows up on time, does the work to spec, and leaves your property spotless — backed by our satisfaction guarantee.",
               },
             ].map((s) => (
-              <li key={s.n} className="relative rounded-2xl border border-sand-200 bg-white p-7 shadow-card">
-                <span className="font-display absolute -top-5 left-7 flex h-10 w-10 items-center justify-center rounded-full bg-pine-800 text-lg font-semibold text-white">
+              <li key={s.n} className="relative rounded-xl border border-sand-200 bg-white p-6 pt-7 shadow-card">
+                <span className="absolute -top-4 left-6 flex h-9 w-9 items-center justify-center rounded-lg bg-pine-800 text-sm font-extrabold text-white">
                   {s.n}
                 </span>
-                <h3 className="mt-3 font-display text-xl font-semibold text-pine-950">{s.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.d}</p>
+                <h3 className="text-lg font-extrabold tracking-tight text-pine-950">{s.t}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{s.d}</p>
               </li>
             ))}
           </ol>
@@ -209,24 +209,24 @@ export default function HomePage() {
       <Testimonials />
 
       {/* Service area */}
-      <section className="py-16 sm:py-24">
-        <div className="container-site grid items-center gap-10 lg:grid-cols-2">
+      <section className="section-y">
+        <div className="container-site grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
           <div>
             <Eyebrow>Local &amp; nearby</Eyebrow>
-            <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+            <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
               Proudly serving New Castle County
             </h2>
-            <p className="mt-4 text-ink-soft">
+            <p className="mt-3 text-ink-soft">
               We&apos;re based in Wilmington and work throughout northern Delaware. If
               you&apos;re in one of these towns, you&apos;re in our service area — and
               if you&apos;re close, call us anyway.
             </p>
-            <ul className="mt-6 flex flex-wrap gap-2.5">
+            <ul className="mt-5 flex flex-wrap gap-2">
               {towns.map((t) => (
                 <li key={t.slug}>
                   <Link
                     href={`/service-areas/${t.slug}`}
-                    className="inline-block rounded-full border border-pine-800/20 bg-white px-4 py-2 text-sm font-medium text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
+                    className="inline-block rounded-lg border border-pine-800/20 bg-white px-3.5 py-1.5 text-sm font-bold text-pine-900 transition-colors hover:border-pine-800 hover:bg-pine-50"
                   >
                     {t.name}, DE
                   </Link>
@@ -238,7 +238,7 @@ export default function HomePage() {
             variant="garden"
             photo={photos.serviceArea}
             alt="Professionally landscaped garden bed with trees, shrubs, and seasonal flowers"
-            className="aspect-[4/3] w-full rounded-3xl shadow-lift"
+            className="aspect-[4/3] w-full rounded-2xl shadow-lift"
           />
         </div>
       </section>

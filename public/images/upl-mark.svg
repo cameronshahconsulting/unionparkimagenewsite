@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img">
+  <title>UPL</title>
+  <rect width="64" height="64" fill="#000000"/>
+  <!-- Cyan outline layer (offset glow) -->
+  <text
+    x="32.5"
+    y="41.5"
+    text-anchor="middle"
+    font-family="Arial Black, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="22"
+    font-weight="900"
+    fill="none"
+    stroke="#17aacb"
+    stroke-width="4.5"
+    stroke-linejoin="round"
+  >UPL</text>
+  <!-- Hot pink fill -->
+  <text
+    x="32"
+    y="41"
+    text-anchor="middle"
+    font-family="Arial Black, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="22"
+    font-weight="900"
+    fill="#dd1a83"
+  >UPL</text>
+</svg>

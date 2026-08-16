@@ -15,37 +15,58 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          padding: "80px",
-          background: "linear-gradient(135deg, #062733 0%, #0c4c5f 55%, #1489a8 100%)",
+          padding: "72px 80px",
+          background: "#000000",
           color: "white",
-          fontFamily: "Georgia, serif",
+          fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
           <div
             style={{
-              width: 64,
-              height: 64,
-              borderRadius: 999,
-              background: "#dd1a83",
+              width: 88,
+              height: 88,
+              borderRadius: 14,
+              background: "#000",
+              border: "3px solid #17aacb",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "#ffffff",
-              fontSize: 28,
-              fontWeight: 700,
+              color: "#dd1a83",
+              fontSize: 34,
+              fontWeight: 900,
+              letterSpacing: 1,
+              textShadow: "3px 3px 0 #17aacb",
             }}
           >
-            UP
+            UPL
           </div>
-          <div style={{ fontSize: 34, letterSpacing: 6, textTransform: "uppercase", color: "#cfeef7" }}>
+          <div
+            style={{
+              fontSize: 36,
+              fontWeight: 900,
+              letterSpacing: 4,
+              textTransform: "uppercase",
+              color: "#dd1a83",
+              textShadow: "3px 3px 0 #17aacb",
+            }}
+          >
             Union Park Landscaping
           </div>
         </div>
-        <div style={{ fontSize: 72, fontWeight: 700, marginTop: 48, lineHeight: 1.1, maxWidth: 950 }}>
+        <div
+          style={{
+            fontSize: 64,
+            fontWeight: 800,
+            marginTop: 44,
+            lineHeight: 1.1,
+            maxWidth: 980,
+            color: "#ffffff",
+          }}
+        >
           Landscaping in Wilmington &amp; New Castle County, DE
         </div>
-        <div style={{ display: "flex", fontSize: 32, marginTop: 32, color: "#cfeef7" }}>
+        <div style={{ display: "flex", fontSize: 28, marginTop: 28, color: "#17aacb", fontWeight: 700 }}>
           {`5.0 on Google · Free estimates · ${site.phone}`}
         </div>
       </div>

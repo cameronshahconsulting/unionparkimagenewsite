@@ -20,13 +20,13 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-sand-200 bg-cream/90 backdrop-blur supports-[backdrop-filter]:bg-cream/75">
-      <div className="container-site flex h-16 items-center justify-between gap-4 sm:h-[4.5rem]">
-        <Link href="/home" aria-label={`${site.name} home`} onClick={() => setOpen(false)}>
+    <header className="sticky top-0 z-50 border-b border-sand-200 bg-cream/95 backdrop-blur supports-[backdrop-filter]:bg-cream/85">
+      <div className="container-site flex h-[4.5rem] items-center justify-between gap-4">
+        <Link href="/home" aria-label={`${site.name} home`} onClick={() => setOpen(false)} className="min-w-0 shrink">
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Main">
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Main">
           {nav.map((item) => {
             const active =
               item.href === "/"
@@ -36,7 +36,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-pine-700 ${
+                className={`text-[14.5px] font-bold transition-colors hover:text-pine-700 ${
                   active ? "text-pine-800" : "text-ink"
                 }`}
               >
@@ -49,11 +49,11 @@ export function Header() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={site.phoneHref}
-            className="text-sm font-semibold text-pine-900 hover:text-pine-700"
+            className="text-sm font-extrabold text-pine-900 hover:text-pine-700"
           >
             {site.phone}
           </a>
-          <Link href="/contact" className="btn-primary !px-5 !py-2.5 !text-sm">
+          <Link href="/contact" className="btn-primary !px-4 !py-2.5 !text-sm">
             Free Estimate
           </Link>
         </div>

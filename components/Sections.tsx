@@ -15,11 +15,11 @@ export function TrustBar() {
   ];
   return (
     <section aria-label="Why homeowners choose us" className="border-y border-sand-200 bg-white">
-      <div className="container-site grid grid-cols-2 gap-6 py-8 sm:grid-cols-4">
+      <div className="container-site grid grid-cols-2 gap-5 py-7 sm:grid-cols-4 sm:gap-6 sm:py-8">
         {items.map((i) => (
-          <div key={i.label} className="text-center">
-            <p className="font-display text-3xl font-semibold text-pine-800">{i.stat}</p>
-            <p className="mt-1 text-xs text-ink-soft sm:text-sm">{i.label}</p>
+          <div key={i.label} className="text-center sm:text-left">
+            <p className="text-2xl font-extrabold tracking-tight text-pine-800 sm:text-3xl">{i.stat}</p>
+            <p className="mt-1 text-xs font-semibold leading-snug text-ink-soft sm:text-sm">{i.label}</p>
           </div>
         ))}
       </div>
@@ -50,24 +50,24 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="bg-pine-50 py-16 sm:py-20">
+    <section className="section-y bg-pine-50">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow>5.0 stars on Google</Eyebrow>
-          <h2 className="heading-display mt-2 text-3xl sm:text-4xl">
+          <h2 className="heading-display mt-2 text-3xl sm:text-[2.5rem]">
             Neighbors trust us with their yards
           </h2>
         </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-3 md:gap-5">
           {testimonials.map((t) => (
-            <figure key={t.quote} className="card p-6">
-              <div className="text-clay-500" aria-label="5 out of 5 stars">
+            <figure key={t.quote} className="card p-5 sm:p-6">
+              <div className="text-sm text-clay-500" aria-label="5 out of 5 stars">
                 {"★★★★★"}
               </div>
-              <blockquote className="mt-3 text-[0.95rem] leading-relaxed text-ink">
+              <blockquote className="mt-2.5 text-[0.95rem] leading-relaxed text-ink">
                 “{t.quote}”
               </blockquote>
-              <figcaption className="mt-4 text-sm font-medium text-ink-soft">
+              <figcaption className="mt-3.5 text-sm font-bold text-ink-soft">
                 {t.name} · {t.town}
               </figcaption>
             </figure>
@@ -93,15 +93,15 @@ export function FaqSection({
   intro?: string;
 }) {
   return (
-    <section className="py-16 sm:py-20">
+    <section className="section-y">
       <JsonLd data={faqJsonLd(faqs)} />
       <div className="container-site max-w-3xl">
-        <h2 className="heading-display text-3xl sm:text-4xl">{title}</h2>
+        <h2 className="heading-display text-3xl sm:text-[2.5rem]">{title}</h2>
         {intro && <p className="mt-3 text-ink-soft">{intro}</p>}
-        <div className="mt-8 divide-y divide-sand-200 rounded-2xl border border-sand-200 bg-white">
+        <div className="mt-7 divide-y divide-sand-200 rounded-xl border border-sand-200 bg-white">
           {faqs.map((f) => (
-            <details key={f.q} className="group px-6 py-4 open:bg-pine-50/50">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-1 text-left font-semibold text-pine-950 [&::-webkit-details-marker]:hidden">
+            <details key={f.q} className="group px-5 py-3.5 open:bg-pine-50/50 sm:px-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-1 text-left font-extrabold text-pine-950 [&::-webkit-details-marker]:hidden">
                 {f.q}
                 <span className="text-pine-700 transition-transform group-open:rotate-45" aria-hidden>
                   +
@@ -124,11 +124,11 @@ export function CtaSection({
   body?: string;
 }) {
   return (
-    <section className="bg-pine-900 py-16 text-white sm:py-20">
+    <section className="bg-pine-900 py-12 text-white sm:py-16">
       <div className="container-site flex flex-col items-center text-center">
-        <h2 className="heading-display max-w-2xl text-3xl !text-white sm:text-4xl">{title}</h2>
-        <p className="mt-4 max-w-xl text-pine-100">{body}</p>
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <h2 className="heading-display max-w-2xl text-3xl !text-white sm:text-[2.5rem]">{title}</h2>
+        <p className="mt-3 max-w-xl text-[1.05rem] text-pine-100">{body}</p>
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <Link href="/contact" className="btn-primary">
             Get My Free Estimate
           </Link>

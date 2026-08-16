@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Fraunces } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/SiteChrome";
 import { JsonLd, localBusinessJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
 
-const inter = Inter({
-  variable: "--font-inter",
+/** Same sans family Annie's uses for body — keeps the two brands feeling related. */
+const nunito = Nunito_Sans({
+  variable: "--font-nunito",
   subsets: ["latin"],
   display: "swap",
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["opsz"],
+  weight: ["400", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -40,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`${nunito.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col">
         <JsonLd data={localBusinessJsonLd()} />
         <SiteChrome>{children}</SiteChrome>
       </body>

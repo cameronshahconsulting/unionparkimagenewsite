@@ -2,10 +2,8 @@
 
 @theme {
   /* Brand palette: Miami blue (primary) + hot pink (accent) + cool neutrals.
-     Token names are kept from the previous theme so component classes still
-     resolve; only the underlying color values changed. */
+     Token names kept so existing utility classes still resolve. */
 
-  /* Primary — Miami blue, from deep ink-teal (headings/text) to bright cyan. */
   --color-pine-950: #062733;
   --color-pine-900: #093544;
   --color-pine-800: #0c4c5f;
@@ -15,34 +13,31 @@
   --color-pine-100: #cfeef7;
   --color-pine-50: #ecf8fc;
 
-  /* Supporting — muted blue-grays. */
   --color-moss-600: #5a7581;
   --color-moss-400: #90a8b1;
   --color-moss-200: #cbdce1;
 
-  /* Neutrals — clean, cool near-whites. */
-  --color-cream: #f6fafb;
+  --color-cream: #f4f8fa;
   --color-sand-100: #eef4f6;
-  --color-sand-200: #e0eaee;
-  --color-sand-300: #ccdae0;
+  --color-sand-200: #dde8ec;
+  --color-sand-300: #c5d5dc;
 
-  /* Accent — hot pink (CTAs, eyebrows, highlights). */
   --color-clay-700: #b3126a;
   --color-clay-600: #dd1a83;
   --color-clay-500: #f23f9c;
   --color-clay-100: #fbdcee;
 
   --color-ink: #0e2730;
-  --color-ink-soft: #486570;
+  --color-ink-soft: #4a6570;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  /* All-sans stack (Nunito Sans — shared with Annie's body type) */
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-lift: 0 10px 30px -12px rgb(6 39 51 / 0.25);
-  --shadow-card: 0 2px 12px -4px rgb(6 39 51 / 0.12);
+  --shadow-lift: 0 14px 32px -18px rgb(6 39 51 / 0.28);
+  --shadow-card: 0 1px 0 rgb(6 39 51 / 0.04), 0 8px 24px -16px rgb(6 39 51 / 0.18);
 }
 
-/* Marketing site is intentionally light-only for brand consistency */
 html {
   color-scheme: light;
   scroll-behavior: smooth;
@@ -52,79 +47,86 @@ body {
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
 
 @layer components {
   .container-site {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
 
   .btn-primary,
   .btn-secondary,
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-base font-semibold transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-700;
   }
   .btn-primary {
-    @apply bg-clay-600 text-white hover:bg-clay-700 shadow-lift;
+    @apply bg-clay-600 text-white hover:bg-clay-700 hover:-translate-y-0.5 shadow-lift;
   }
   .btn-secondary {
-    @apply bg-pine-800 text-white hover:bg-pine-900;
+    @apply bg-pine-800 text-white hover:bg-pine-900 hover:-translate-y-0.5;
   }
   .btn-ghost {
-    @apply border border-pine-800/25 bg-white/70 text-pine-900 hover:border-pine-800/60 hover:bg-white;
+    @apply border border-pine-800/20 bg-white text-pine-900 hover:border-pine-800/50 hover:bg-pine-50;
   }
 
   .heading-display {
-    @apply font-display font-semibold tracking-tight text-pine-950;
+    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950;
+    line-height: 1.08;
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-clay-600;
+    @apply text-[11px] font-extrabold uppercase tracking-[0.14em] text-clay-600;
   }
 
   .card {
-    @apply rounded-2xl border border-sand-200 bg-white shadow-card;
+    @apply rounded-xl border border-sand-200 bg-white shadow-card;
+  }
+
+  .section-y {
+    @apply py-12 sm:py-16;
   }
 
   .prose-site {
-    @apply text-[1.0625rem] leading-relaxed text-ink-soft;
+    @apply text-[1.05rem] leading-relaxed text-ink-soft;
   }
   .prose-site h2 {
-    @apply font-display font-semibold tracking-tight text-pine-950 mt-10 mb-4 text-2xl sm:text-3xl;
+    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950 mt-9 mb-3 text-2xl sm:text-[1.75rem];
   }
   .prose-site h3 {
-    @apply font-display font-semibold tracking-tight text-pine-950 mt-8 mb-3 text-xl sm:text-2xl;
+    @apply font-sans font-extrabold tracking-[-0.02em] text-pine-950 mt-7 mb-2 text-xl;
   }
   .prose-site p {
-    @apply my-4;
+    @apply my-3.5;
   }
   .prose-site ul {
-    @apply my-4 list-disc pl-6;
+    @apply my-3.5 list-disc pl-6;
   }
   .prose-site ol {
-    @apply my-4 list-decimal pl-6;
+    @apply my-3.5 list-decimal pl-6;
   }
   .prose-site li {
-    @apply my-1.5;
+    @apply my-1;
   }
   .prose-site a {
-    @apply font-medium text-pine-700 underline underline-offset-4 hover:text-pine-900;
+    @apply font-bold text-pine-700 underline underline-offset-4 hover:text-pine-900;
   }
   .prose-site strong {
-    @apply font-semibold text-pine-950;
+    @apply font-extrabold text-pine-950;
   }
   .prose-site table {
-    @apply my-6 w-full border-collapse overflow-hidden rounded-xl text-sm;
+    @apply my-6 w-full border-collapse overflow-hidden rounded-lg text-sm;
   }
   .prose-site th {
-    @apply border border-sand-200 bg-pine-50 px-3 py-2 text-left font-semibold text-pine-950;
+    @apply border border-sand-200 bg-pine-50 px-3 py-2 text-left font-extrabold text-pine-950;
   }
   .prose-site td {
     @apply border border-sand-200 bg-white px-3 py-2;
   }
   .prose-site blockquote {
-    @apply my-6 border-l-4 border-pine-500 bg-pine-50 px-5 py-3 italic text-pine-900;
+    @apply my-6 border-l-4 border-pine-500 bg-pine-50 px-5 py-3 text-pine-900;
   }
 }
