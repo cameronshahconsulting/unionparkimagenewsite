@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { TrustBar, Testimonials, FaqSection, CtaSection, Eyebrow } from "@/components/Sections";
+import { Testimonials, FaqSection, CtaSection, Eyebrow } from "@/components/Sections";
 import { GardenDesigner } from "@/components/designer/GardenDesigner";
 import { site, services, towns, yearsInBusiness } from "@/lib/site";
 import { photos, servicePhotos } from "@/lib/photos";
@@ -76,7 +76,8 @@ export default function HomePage() {
           </h1>
           <p className="mt-4 max-w-lg text-base text-white/85 sm:text-lg">
             Landscape design, patios, drainage, fencing, cleanups, and lawn care for homeowners
-            across {site.address.county}, DE. Family-run since {site.foundedYear}.
+            across {site.address.county}, DE. Family-run since {site.foundedYear} — 5.0 on Google,
+            free estimates, and a satisfaction guarantee on every job.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link href="/contact" className="btn-primary">
@@ -95,8 +96,6 @@ export default function HomePage() {
           </p>
         </div>
       </section>
-
-      <TrustBar />
 
       {/* Yard Designer */}
       <section id="visualizer" className="section-y scroll-mt-24 bg-white">
