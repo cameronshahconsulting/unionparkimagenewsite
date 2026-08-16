@@ -1,30 +1,9 @@
 import Link from "next/link";
-import { site, yearsInBusiness } from "@/lib/site";
+import { site } from "@/lib/site";
 import { JsonLd, faqJsonLd } from "@/components/JsonLd";
 
 export function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="eyebrow">{children}</p>;
-}
-
-export function TrustBar() {
-  const items = [
-    { stat: `${yearsInBusiness}+`, label: "Years serving New Castle County" },
-    { stat: "5.0★", label: "Google rating from local homeowners" },
-    { stat: "100%", label: "Satisfaction guarantee on every job" },
-    { stat: "24hr", label: "Typical estimate turnaround" },
-  ];
-  return (
-    <section aria-label="Why homeowners choose us" className="border-y border-sand-200 bg-white">
-      <div className="container-site grid grid-cols-2 gap-6 py-8 sm:grid-cols-4 sm:gap-8 sm:py-9">
-        {items.map((i) => (
-          <div key={i.label} className="text-center sm:text-left">
-            <p className="text-2xl font-extrabold tracking-tight text-pine-800 sm:text-3xl">{i.stat}</p>
-            <p className="mt-1 text-xs font-semibold leading-snug text-ink-soft sm:text-sm">{i.label}</p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
 }
 
 const testimonials = [
