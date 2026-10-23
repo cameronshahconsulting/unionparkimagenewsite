@@ -22,7 +22,7 @@ Copy `.env.example` to `.env.local` and fill in:
 | `GEMINI_API_KEY` | AI yard designs + plant/materials analysis | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (pay-per-image, ~$0.04–0.13/design) |
 | `RESEND_API_KEY` | Sends lead + confirmation emails | [resend.com](https://resend.com) (free tier: 100/day) |
 | `LEAD_EMAIL_TO` | Where leads land (default `unionparklandscaping@gmail.com`) | — |
-| `LEAD_EMAIL_FROM` | Verified sender. Until the domain is verified in Resend, leave unset to use `onboarding@resend.dev` | Resend → Domains |
+| `LEAD_EMAIL_FROM` | Verified sender for all Union Park emails (including designer codes and saved designs). Falls back to `RESEND_FROM_EMAIL`, then the Resend test sender; the display name is always Union Park Landscaping | Resend → Domains |
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Enforces the 3-designs/day limit across serverless instances (**required in production**; dev falls back to in-memory) | Vercel dashboard → Storage → Upstash for Redis, or [console.upstash.com](https://console.upstash.com) |
 | `GEMINI_IMAGE_MODEL` / `GEMINI_TEXT_MODEL` | Optional model overrides (defaults: `gemini-3.1-flash-image`, `gemini-2.5-flash`) | — |
 | `MOCK_AI=true` | Force demo mode even with keys set | — |

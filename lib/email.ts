@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { Resend } from "resend";
+import { unionParkSender, unionParkSubject } from "./email-brand";
 import { site } from "@/lib/site";
 import type { DesignBreakdown, PlantLine } from "@/lib/ai";
 
@@ -127,7 +128,7 @@ function dataUrlToAttachment(
 export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
   if (lead.kind === "contact") {
     return {
-      subject: `New estimate request — ${lead.name}${lead.town ? ` (${lead.town})` : ""}${lead.service ? ` · ${lead.service}` : ""}`,
+      subject: unionParkSubject(`New estimate request — ${lead.name}${lead.town ? ` (${lead.town})` : ""}${lead.service ? ` · ${lead.service}` : ""}`),
       replyTo: lead.email,
       html: shell(
         "New estimate request",
@@ -140,7 +141,7 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
   }
 
   return {
-    subject: `🌿 AI design lead — ${lead.name} (${lead.town})`,
+    subject: unionParkSubject(`AI design lead — ${lead.name} (${lead.town})`),
     replyTo: lead.email,
     html: shell(
       "AI Yard Designer lead",
@@ -182,6 +183,7 @@ export function renderCustomerEmail(
   }
   return {
     subject: "Your AI yard design — Union Park Landscaping",
+    replyTo: site.email,
     toCustomer: lead.email,
     html: shell(
       "We got your design!",
@@ -198,9 +200,7 @@ export function renderCustomerEmail(
 
 export async function sendLeadEmail(email: LeadEmail): Promise<void> {
   const to = email.toCustomer ?? process.env.LEAD_EMAIL_TO ?? site.email;
-  const from =
-    process.env.LEAD_EMAIL_FROM ??
-    "Union Park Landscaping <onboarding@resend.dev>";
+  const from = unionParkSender();
 
   if (!process.env.RESEND_API_KEY) {
     if (
