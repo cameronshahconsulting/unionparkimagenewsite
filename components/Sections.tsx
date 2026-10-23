@@ -46,7 +46,7 @@ export function Testimonials({ data }: { data?: GoogleReviewsPayload }) {
   if (shown.length === 0) return null;
 
   return (
-    <section className="section-y">
+    <section className="section-y bg-white">
       <div className="container-site">
         <div className="mx-auto max-w-2xl text-center">
           <Eyebrow>Google reviews</Eyebrow>
@@ -59,9 +59,9 @@ export function Testimonials({ data }: { data?: GoogleReviewsPayload }) {
             average from {payload.count}+ Google reviews
           </p>
         </div>
-        <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-12">
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
           {shown.map((t) => (
-            <figure key={`${t.author}-${t.text.slice(0, 24)}`}>
+            <figure key={`${t.author}-${t.text.slice(0, 24)}`} className="rounded-2xl border border-sand-200 p-6 sm:p-7">
               <div
                 className="text-sm text-moss-600"
                 aria-label={`${t.rating} out of 5 stars`}
@@ -76,7 +76,7 @@ export function Testimonials({ data }: { data?: GoogleReviewsPayload }) {
                 <span className="font-semibold text-ink-soft">
                   {" "}
                   · Google
-                  {t.relativeTime ? ` · ${t.relativeTime}` : ""}
+                  {t.relativeTime && t.relativeTime !== "Google review" ? ` · ${t.relativeTime}` : ""}
                 </span>
               </figcaption>
             </figure>
@@ -137,7 +137,7 @@ export function FaqSection({
 
 export function CtaSection({
   title = "Ready to love your yard again?",
-  body = `Call for a free, no-pressure estimate. Most quotes within 24 hours. Serving all of ${site.address.county}, Delaware.`,
+  body = `Tell us what you have in mind. We typically respond within one business day. Free written estimates across ${site.address.county}, Delaware.`,
 }: {
   title?: string;
   body?: string;

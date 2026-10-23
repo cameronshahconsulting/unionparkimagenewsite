@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { site, towns } from "@/lib/site";
 import type { DesignBreakdown } from "@/lib/ai";
+import { prepareEstimateImage } from "./imageUtils";
 
 export interface ChosenDesign {
   originalPhoto: string;
@@ -19,15 +20,24 @@ export function EstimateForm({
   design: ChosenDesign;
   onBack: () => void;
 }) {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const submitting = useRef(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
   const [error, setError] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitting.current) return;
+    submitting.current = true;
     const data = Object.fromEntries(new FormData(e.currentTarget).entries());
     setStatus("sending");
     setError("");
     try {
+      const [originalPhoto, designImage] = await Promise.all([
+        prepareEstimateImage(design.originalPhoto),
+        prepareEstimateImage(design.designImage),
+      ]);
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,8 +47,8 @@ export function EstimateForm({
           request: design.request,
           styles: design.styles,
           breakdown: design.breakdown,
-          originalPhoto: design.originalPhoto,
-          designImage: design.designImage,
+          originalPhoto,
+          designImage,
         }),
       });
       if (!res.ok) {
@@ -49,19 +59,29 @@ export function EstimateForm({
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      submitting.current = false;
     }
   }
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-pine-500/40 bg-pine-50 p-8 text-center">
+      <div
+        role="status"
+        tabIndex={-1}
+        ref={(node) => node?.focus()}
+        className="rounded-2xl border border-pine-500/40 bg-pine-50 p-8 text-center"
+      >
         <p className="font-display text-2xl font-semibold text-pine-900">
           Design sent — we&apos;re on it ✓
         </p>
         <p className="mx-auto mt-3 max-w-md text-ink-soft">
-          Your design and details are with our team. We&apos;ll call you back with a
-          real quote, usually within one business day. Want to talk now?{" "}
-          <a href={site.phoneHref} className="font-semibold text-pine-800 underline">
+          Your design and details are with our team. We&apos;ll call you back
+          with a real quote, usually within one business day. Want to talk now?{" "}
+          <a
+            href={site.phoneHref}
+            className="font-semibold text-pine-800 underline"
+          >
             {site.phone}
           </a>
         </p>
@@ -73,36 +93,91 @@ export function EstimateForm({
     "w-full rounded-xl border border-sand-300 bg-white px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-soft/60 focus:border-pine-600 focus:outline-none focus:ring-2 focus:ring-pine-600/20";
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+    <form
+      aria-busy={status === "sending"}
+      onSubmit={onSubmit}
+      className="space-y-4"
+    >
+      <input
+        type="text"
+        name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="viz-name" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="viz-name"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Name *
           </label>
-          <input id="viz-name" name="name" required maxLength={100} className={inputCls} placeholder="Your name" />
+          <input
+            id="viz-name"
+            name="name"
+            autoComplete="name"
+            required
+            maxLength={100}
+            className={inputCls}
+            placeholder="Your name"
+          />
         </div>
         <div>
-          <label htmlFor="viz-phone" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="viz-phone"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Phone *
           </label>
-          <input id="viz-phone" name="phone" type="tel" required maxLength={30} className={inputCls} placeholder="(302) 555-0123" />
+          <input
+            id="viz-phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            minLength={7}
+            required
+            maxLength={30}
+            className={inputCls}
+            placeholder="(302) 555-0123"
+          />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="viz-email" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="viz-email"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Email
           </label>
-          <input id="viz-email" name="email" type="email" maxLength={120} className={inputCls} placeholder="you@email.com" />
+          <input
+            id="viz-email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            maxLength={120}
+            className={inputCls}
+            placeholder="you@email.com"
+          />
         </div>
         <div>
-          <label htmlFor="viz-town" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="viz-town"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Town *
           </label>
-          <select id="viz-town" name="town" required className={inputCls} defaultValue="">
+          <select
+            id="viz-town"
+            name="town"
+            required
+            className={inputCls}
+            defaultValue=""
+          >
             <option value="" disabled>
               Select your town
             </option>
@@ -117,7 +192,10 @@ export function EstimateForm({
       </div>
 
       <div>
-        <label htmlFor="viz-address" className="mb-1.5 block text-sm font-semibold text-pine-950">
+        <label
+          htmlFor="viz-address"
+          className="mb-1.5 block text-sm font-semibold text-pine-950"
+        >
           Street address
         </label>
         <input
@@ -130,7 +208,10 @@ export function EstimateForm({
       </div>
 
       <div>
-        <label htmlFor="viz-notes" className="mb-1.5 block text-sm font-semibold text-pine-950">
+        <label
+          htmlFor="viz-notes"
+          className="mb-1.5 block text-sm font-semibold text-pine-950"
+        >
           Anything else we should know?
         </label>
         <textarea
@@ -144,7 +225,10 @@ export function EstimateForm({
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-lg bg-clay-100 px-4 py-3 text-sm font-medium text-clay-700">
+        <p
+          role="alert"
+          className="rounded-lg bg-clay-100 px-4 py-3 text-sm font-medium text-clay-700"
+        >
           {error} You can also call us at {site.phone}.
         </p>
       )}
@@ -153,13 +237,19 @@ export function EstimateForm({
         <button type="button" onClick={onBack} className="btn-ghost sm:w-auto">
           ← Back to my designs
         </button>
-        <button type="submit" disabled={status === "sending"} className="btn-primary flex-1 disabled:opacity-60">
-          {status === "sending" ? "Sending your design…" : "Send My Design & Get a Free Estimate"}
+        <button
+          type="submit"
+          disabled={status === "sending"}
+          className="btn-primary flex-1 disabled:opacity-60"
+        >
+          {status === "sending"
+            ? "Sending your design…"
+            : "Send My Design & Get a Free Estimate"}
         </button>
       </div>
       <p className="text-center text-xs text-ink-soft">
-        We&apos;ll include your yard photo and chosen design so our estimator can prep
-        before calling you back. No spam, ever.
+        We&apos;ll include your yard photo and chosen design so our estimator
+        can prep before calling you back. No spam, ever.
       </p>
     </form>
   );

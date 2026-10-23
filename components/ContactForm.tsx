@@ -1,16 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { site, services, towns } from "@/lib/site";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
-export function ContactForm() {
+export function ContactForm({
+  initialService = "",
+}: {
+  initialService?: string;
+}) {
+  const submitting = useRef(false);
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (submitting.current) return;
+    submitting.current = true;
     const form = e.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
     setStatus("sending");
@@ -30,17 +37,29 @@ export function ContactForm() {
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      submitting.current = false;
     }
   }
 
   if (status === "sent") {
     return (
-      <div className="card border-pine-500/40 bg-pine-50 p-8 text-center">
-        <p className="font-display text-2xl font-semibold text-pine-900">Request received ✓</p>
+      <div
+        role="status"
+        tabIndex={-1}
+        ref={(node) => node?.focus()}
+        className="card border-pine-500/40 bg-pine-50 p-8 text-center"
+      >
+        <p className="font-display text-2xl font-semibold text-pine-900">
+          Request received ✓
+        </p>
         <p className="mt-2 text-ink-soft">
-          Thanks. We&apos;ll get back to you shortly, usually within one business day.
-          Need us sooner? Call{" "}
-          <a href={site.phoneHref} className="font-semibold text-pine-800 underline">
+          Thanks. We&apos;ll get back to you shortly, usually within one
+          business day. Need us sooner? Call{" "}
+          <a
+            href={site.phoneHref}
+            className="font-semibold text-pine-800 underline"
+          >
             {site.phone}
           </a>
           .
@@ -53,34 +72,83 @@ export function ContactForm() {
     "w-full rounded-xl border border-sand-300 bg-white px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-soft/60 focus:border-pine-600 focus:outline-none focus:ring-2 focus:ring-pine-600/20";
 
   return (
-    <form onSubmit={onSubmit} className="card space-y-4 p-6 sm:p-8">
+    <form
+      onSubmit={onSubmit}
+      aria-busy={status === "sending"}
+      className="card space-y-4 p-6 sm:p-8"
+    >
       {/* Honeypot */}
-      <input type="text" name="company_website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input
+        type="text"
+        name="company_website"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden="true"
+      />
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="name"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Name *
           </label>
-          <input id="name" name="name" required maxLength={100} className={inputCls} placeholder="Your name" />
+          <input
+            id="name"
+            name="name"
+            autoComplete="name"
+            required
+            maxLength={100}
+            className={inputCls}
+            placeholder="Your name"
+          />
         </div>
         <div>
-          <label htmlFor="phone" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="phone"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Phone *
           </label>
-          <input id="phone" name="phone" type="tel" required maxLength={30} className={inputCls} placeholder="(302) 555-0123" />
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            minLength={7}
+            required
+            maxLength={30}
+            className={inputCls}
+            placeholder="(302) 555-0123"
+          />
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="email" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="email"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Email
           </label>
-          <input id="email" name="email" type="email" maxLength={120} className={inputCls} placeholder="you@email.com" />
+          <input
+            id="email"
+            name="email"
+            type="email"
+            autoComplete="email"
+            maxLength={120}
+            className={inputCls}
+            placeholder="you@email.com"
+          />
         </div>
         <div>
-          <label htmlFor="town" className="mb-1.5 block text-sm font-semibold text-pine-950">
+          <label
+            htmlFor="town"
+            className="mb-1.5 block text-sm font-semibold text-pine-950"
+          >
             Town
           </label>
           <select id="town" name="town" className={inputCls} defaultValue="">
@@ -98,10 +166,18 @@ export function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="service" className="mb-1.5 block text-sm font-semibold text-pine-950">
+        <label
+          htmlFor="service"
+          className="mb-1.5 block text-sm font-semibold text-pine-950"
+        >
           What do you need?
         </label>
-        <select id="service" name="service" className={inputCls} defaultValue="">
+        <select
+          id="service"
+          name="service"
+          className={inputCls}
+          defaultValue={initialService}
+        >
           <option value="" disabled>
             Select a service
           </option>
@@ -110,12 +186,17 @@ export function ContactForm() {
               {s.short}
             </option>
           ))}
-          <option value="Multiple / not sure">Multiple things / not sure yet</option>
+          <option value="Multiple / not sure">
+            Multiple things / not sure yet
+          </option>
         </select>
       </div>
 
       <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-semibold text-pine-950">
+        <label
+          htmlFor="message"
+          className="mb-1.5 block text-sm font-semibold text-pine-950"
+        >
           Tell us about the project *
         </label>
         <textarea
@@ -130,16 +211,23 @@ export function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="rounded-lg bg-clay-100 px-4 py-3 text-sm font-medium text-clay-700">
+        <p
+          role="alert"
+          className="rounded-lg bg-clay-100 px-4 py-3 text-sm font-medium text-clay-700"
+        >
           {error} You can also call us at {site.phone}.
         </p>
       )}
 
-      <button type="submit" disabled={status === "sending"} className="btn-primary w-full disabled:opacity-60">
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="btn-primary w-full disabled:opacity-60"
+      >
         {status === "sending" ? "Sending…" : "Request My Free Estimate"}
       </button>
       <p className="text-center text-xs text-ink-soft">
-        No spam, no obligation. We typically reply within one business day.
+        Your details are used to respond to your request. No obligation.
       </p>
     </form>
   );

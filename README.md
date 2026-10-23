@@ -11,7 +11,7 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-With no env vars set, the site runs in **demo mode**: the AI visualizer echoes the uploaded photo with sample analysis, and lead "emails" are written to `.lead-outbox/` instead of being sent. The full flow is testable without any keys.
+In local development, with no env vars set, the legacy visualizer runs in **demo mode**: the AI visualizer echoes the uploaded photo with sample analysis, and lead "emails" are written to `.lead-outbox/` instead of being sent. Contact/estimate email rendering is testable locally without keys. Production requires Resend configuration and rejects requests when delivery is not configured. The current Annie’s garden designer additionally requires its configured AI, storage, and email services.
 
 ## Environment variables
 
@@ -65,4 +65,5 @@ Spam controls: honeypot field, per-IP lead cap, zod validation, strict image-typ
 npm run dev      # dev server
 npm run build    # production build (34 static pages + 2 API routes)
 npm run lint     # eslint
+npm test         # estimate-image and email-verification regressions (Node 24)
 ```

@@ -28,15 +28,27 @@ const breakdownSchema = z.object({
   shrubs: z.array(plantLine).max(50),
   flowersAndPerennials: z.array(plantLine).max(50),
   materials: z
-    .array(z.object({ item: z.string().max(120), estQuantity: z.string().max(60) }))
+    .array(
+      z.object({ item: z.string().max(120), estQuantity: z.string().max(60) }),
+    )
     .max(50),
   laborNotes: z.string().max(2000),
 });
 
 const base = {
   name: z.string().trim().min(1).max(100),
-  phone: z.string().trim().min(7).max(30),
-  email: z.union([z.literal(""), z.string().trim().email().max(120)]).optional(),
+  phone: z
+    .string()
+    .trim()
+    .min(7)
+    .max(30)
+    .refine((value) => {
+      const digits = value.replace(/\D/g, "");
+      return digits.length >= 7 && digits.length <= 15;
+    }),
+  email: z
+    .union([z.literal(""), z.string().trim().email().max(120)])
+    .optional(),
   company_website: z.string().optional(), // honeypot
 };
 
@@ -61,7 +73,10 @@ const visualizerSchema = z.object({
   designImage: imageDataUrl,
 });
 
-const bodySchema = z.discriminatedUnion("kind", [contactSchema, visualizerSchema]);
+const bodySchema = z.discriminatedUnion("kind", [
+  contactSchema,
+  visualizerSchema,
+]);
 
 function clientIp(req: NextRequest) {
   return (
@@ -83,7 +98,7 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) {
     return NextResponse.json(
       { error: "Please check the required fields and try again." },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -94,8 +109,11 @@ export async function POST(req: NextRequest) {
 
   if (!(await consumeLeadSlot(clientIp(req)))) {
     return NextResponse.json(
-      { error: "Too many requests today — please call us instead: 302-757-5496." },
-      { status: 429 }
+      {
+        error:
+          "Too many requests today — please call us instead: 302-757-5496.",
+      },
+      { status: 429 },
     );
   }
 
@@ -105,21 +123,22 @@ export async function POST(req: NextRequest) {
 
   try {
     await sendLeadEmail(renderTeamEmail(lead));
-    if (lead.kind === "visualizer") {
-      const customerEmail = renderCustomerEmail(lead);
-      if (customerEmail) {
-        // Confirmation is best-effort; the team already has the lead.
-        await sendLeadEmail(customerEmail).catch((e) =>
-          console.error("customer confirmation failed:", e)
-        );
-      }
+    const customerEmail = renderCustomerEmail(lead);
+    if (customerEmail) {
+      // Confirmation is best-effort; the team already has the lead.
+      await sendLeadEmail(customerEmail).catch((e) =>
+        console.error("customer confirmation failed:", e),
+      );
     }
     return NextResponse.json({ ok: true });
   } catch (err) {
     console.error("lead delivery error:", err);
     return NextResponse.json(
-      { error: "We couldn't send your request right now. Please call us at 302-757-5496." },
-      { status: 502 }
+      {
+        error:
+          "We couldn't send your request right now. Please call us at 302-757-5496.",
+      },
+      { status: 502 },
     );
   }
 }

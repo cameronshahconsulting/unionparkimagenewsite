@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Scene } from "@/components/Scene";
-import { CtaSection, FaqSection, Eyebrow } from "@/components/Sections";
+import { CtaSection, FaqSection } from "@/components/Sections";
 import { JsonLd, serviceJsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { serviceContent, getService } from "@/content/services";
 import { site } from "@/lib/site";
@@ -64,7 +64,7 @@ export default async function ServicePage({
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-ink-soft">{service.intro[0]}</p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
+              <Link href={`/contact?service=${service.slug}`} className="btn-primary">
                 Get a Free Estimate
               </Link>
               <a href={site.phoneHref} className="btn-ghost">

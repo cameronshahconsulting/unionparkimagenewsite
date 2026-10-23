@@ -38,7 +38,7 @@ export function Logo({
         alt={site.name}
         width={960}
         height={148}
-        className={`h-10 w-auto sm:h-12 lg:h-14 ${light ? "brightness-110" : ""}`}
+        className={`h-auto w-[215px] max-w-full sm:w-[270px] xl:w-[245px] ${light ? "brightness-110" : ""}`}
         priority
       />
     </span>

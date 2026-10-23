@@ -25,7 +25,11 @@ export interface LeadEmail {
 }
 
 const esc = (s: string) =>
-  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 
 const row = (label: string, value?: string) =>
   value
@@ -51,7 +55,7 @@ function plantRows(label: string, lines: PlantLine[]) {
   return lines
     .map(
       (l) =>
-        `<tr><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(label)}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(l.commonName)}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px;text-align:center">${l.quantity}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(l.size ?? "—")}</td></tr>`
+        `<tr><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(label)}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(l.commonName)}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px;text-align:center">${l.quantity}</td><td style="padding:6px 10px;border:1px solid #e0eaee;font-size:13px">${esc(l.size ?? "—")}</td></tr>`,
     )
     .join("");
 }
@@ -73,7 +77,10 @@ export function breakdownHtml(b: DesignBreakdown) {
   const materials =
     b.materials.length > 0
       ? `<ul style="margin:8px 0;padding-left:18px;color:#0e2730;font-size:14px">${b.materials
-          .map((m) => `<li>${esc(m.item)} — <strong>${esc(m.estQuantity)}</strong></li>`)
+          .map(
+            (m) =>
+              `<li>${esc(m.item)} — <strong>${esc(m.estQuantity)}</strong></li>`,
+          )
           .join("")}</ul>`
       : "";
 
@@ -110,7 +117,10 @@ export interface VisualizerLead {
   designImage: string;
 }
 
-function dataUrlToAttachment(dataUrl: string, filename: string): LeadAttachment {
+function dataUrlToAttachment(
+  dataUrl: string,
+  filename: string,
+): LeadAttachment {
   return { filename, content: dataUrl.split(",", 2)[1] };
 }
 
@@ -124,7 +134,7 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
         `<table style="border-collapse:collapse">${row("Name", lead.name)}${row("Phone", lead.phone)}${row("Email", lead.email)}${row("Town", lead.town)}${row("Service", lead.service)}</table>
         <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Project details</h2>
         <p style="color:#0e2730;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(lead.message)}</p>
-        <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
+        <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`,
       ),
     };
   }
@@ -142,7 +152,7 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
       ${lead.notes ? `<h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Customer notes</h2><p style="color:#0e2730;font-size:14px;line-height:1.6;white-space:pre-wrap">${esc(lead.notes)}</p>` : ""}
       <h2 style="color:#093544;font-size:16px;margin:18px 0 6px">Estimated takeoff (from AI analysis)</h2>
       ${breakdownHtml(lead.breakdown)}
-      <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`
+      <p style="margin-top:20px"><a href="tel:${lead.phone.replace(/[^+\d]/g, "")}" style="background:#dd1a83;color:#fff;padding:10px 22px;border-radius:99px;text-decoration:none;font-weight:bold;font-size:14px">Call ${esc(lead.name)}</a></p>`,
     ),
     attachments: [
       dataUrlToAttachment(lead.originalPhoto, "yard-original.jpg"),
@@ -151,8 +161,25 @@ export function renderTeamEmail(lead: ContactLead | VisualizerLead): LeadEmail {
   };
 }
 
-export function renderCustomerEmail(lead: VisualizerLead): LeadEmail | null {
+export function renderCustomerEmail(
+  lead: ContactLead | VisualizerLead,
+): LeadEmail | null {
   if (!lead.email) return null;
+  if (lead.kind === "contact") {
+    return {
+      subject: "Your estimate request — Union Park Landscaping",
+      toCustomer: lead.email,
+      html: shell(
+        "Thanks for reaching out!",
+        `<p style="line-height:1.6">Hi ${esc(lead.name.split(" ")[0])},</p>
+        <p style="line-height:1.6">We received your estimate request. Our team typically responds within one business day to discuss your project and arrange a property visit when needed.</p>
+        <h2 style="font-size:16px">Your project</h2>
+        <p style="white-space:pre-wrap;line-height:1.6">${esc(lead.message)}</p>
+        <p style="line-height:1.6">Need to add something? Call <a href="${site.phoneHref}">${site.phone}</a> or reply to this email.</p>`,
+      ),
+      replyTo: site.email,
+    };
+  }
   return {
     subject: "Your AI yard design — Union Park Landscaping",
     toCustomer: lead.email,
@@ -161,25 +188,40 @@ export function renderCustomerEmail(lead: VisualizerLead): LeadEmail | null {
       `<p style="color:#0e2730;font-size:14px;line-height:1.6">Hi ${esc(lead.name.split(" ")[0])},</p>
       <p style="color:#0e2730;font-size:14px;line-height:1.6">Thanks for trying our AI yard designer — your chosen design is attached to this email. Our team is reviewing it now and will call you at <strong>${esc(lead.phone)}</strong> with a free, no-obligation estimate, usually within one business day.</p>
       <p style="color:#0e2730;font-size:14px;line-height:1.6">Can't wait? Call us at <a href="${site.phoneHref}" style="color:#0f6884;font-weight:bold">${site.phone}</a> (${site.hours.days}, ${site.hours.open}–${site.hours.close}).</p>
-      <p style="color:#486570;font-size:12px;line-height:1.5">The design is an AI concept preview — your final plan and exact pricing come from our real humans after we see the property.</p>`
+      <p style="color:#486570;font-size:12px;line-height:1.5">The design is an AI concept preview — your final plan and exact pricing come from our real humans after we see the property.</p>`,
     ),
-    attachments: [dataUrlToAttachment(lead.designImage, "your-yard-design.jpg")],
+    attachments: [
+      dataUrlToAttachment(lead.designImage, "your-yard-design.jpg"),
+    ],
   };
 }
 
 export async function sendLeadEmail(email: LeadEmail): Promise<void> {
   const to = email.toCustomer ?? process.env.LEAD_EMAIL_TO ?? site.email;
   const from =
-    process.env.LEAD_EMAIL_FROM ?? "Union Park Landscaping <onboarding@resend.dev>";
+    process.env.LEAD_EMAIL_FROM ??
+    "Union Park Landscaping <onboarding@resend.dev>";
 
   if (!process.env.RESEND_API_KEY) {
-    // Dev fallback: write the email to .lead-outbox/ for inspection.
+    if (
+      process.env.NODE_ENV === "production" ||
+      process.env.VERCEL_ENV === "production"
+    ) {
+      throw new Error("Lead email delivery is not configured.");
+    }
+    // Development only: never report a successful live request without delivery.
     const dir = path.join(process.cwd(), ".lead-outbox");
     fs.mkdirSync(dir, { recursive: true });
     const stamp = new Date().toISOString().replace(/[:.]/g, "-");
-    fs.writeFileSync(path.join(dir, `${stamp}-${to.replace(/[^a-z0-9@.]/gi, "_")}.html`), email.html);
+    fs.writeFileSync(
+      path.join(dir, `${stamp}-${to.replace(/[^a-z0-9@.]/gi, "_")}.html`),
+      email.html,
+    );
     for (const att of email.attachments ?? []) {
-      fs.writeFileSync(path.join(dir, `${stamp}-${att.filename}`), Buffer.from(att.content, "base64"));
+      fs.writeFileSync(
+        path.join(dir, `${stamp}-${att.filename}`),
+        Buffer.from(att.content, "base64"),
+      );
     }
     console.log(`[lead-outbox] wrote "${email.subject}" for ${to}`);
     return;

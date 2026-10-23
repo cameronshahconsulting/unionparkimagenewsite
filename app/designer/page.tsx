@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 import "@/app/designer.css";
 
 export const metadata: Metadata = {
-  title: `AI Garden Designer | ${site.name}`,
+  title: "Free AI Garden Designer",
   description: `Design your yard with Annie's plant catalog, then get a free Union Park Landscaping installation estimate. Serving ${site.address.county}, DE.`,
   alternates: { canonical: "/designer" },
 };

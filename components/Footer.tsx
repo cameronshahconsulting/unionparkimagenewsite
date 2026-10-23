@@ -66,6 +66,7 @@ export function Footer() {
             <li><Link href="/blog" className="hover:text-white hover:underline">Landscaping Blog</Link></li>
             <li><Link href="/contact" className="hover:text-white hover:underline">Free Estimate</Link></li>
             <li><Link href="/home/#visualizer" className="hover:text-white hover:underline">AI Yard Visualizer</Link></li>
+            <li><Link href="/" className="hover:text-white">Choose Union Park or Annie’s</Link></li>
             <li>
               <a
                 href={site.sisterBrand.url}

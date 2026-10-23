@@ -5,6 +5,7 @@ export const site = {
   motto: "We love to get down and dirty.",
   phone: "302-757-5496",
   phoneHref: "tel:+13027575496",
+  smsHref: "sms:+13027575496",
   email: "unionparklandscaping@gmail.com",
   url: "https://www.unionparklandscape.com",
   foundedYear: 2013,

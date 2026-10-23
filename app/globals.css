@@ -10,7 +10,7 @@
   --color-pine-950: #1a2e24;
   --color-pine-900: #24382e;
   --color-pine-800: #2f4a3c;
-  --color-pine-700: #0e7a96;
+  --color-pine-700: #12677b;
   --color-pine-600: #17aacb;
   --color-pine-500: #3bb8d4;
   --color-pine-100: #e2ebe0;
@@ -27,8 +27,8 @@
   --color-sand-300: #c2bbad;
 
   /* Logo pink — primary CTA only */
-  --color-clay-700: #b3126a;
-  --color-clay-600: #dd1a83;
+  --color-clay-700: #a01662;
+  --color-clay-600: #b91c73;
   --color-clay-500: #e84d9a;
   --color-clay-100: #f9e4ef;
 
@@ -39,7 +39,8 @@
   --font-display: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
 
   --shadow-lift: 0 14px 32px -14px rgb(26 46 36 / 0.28);
-  --shadow-card: 0 1px 0 rgb(26 46 36 / 0.04), 0 8px 24px -16px rgb(26 46 36 / 0.18);
+  --shadow-card:
+    0 1px 0 rgb(26 46 36 / 0.04), 0 8px 24px -16px rgb(26 46 36 / 0.18);
   --shadow-pink: 0 10px 22px -10px rgb(221 26 131 / 0.28);
 }
 
@@ -50,8 +51,6 @@ html {
 
 body {
   background-color: var(--color-cream);
-  background-image: url("/art/leaf-texture.svg");
-  background-size: 280px;
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 16px;
@@ -69,7 +68,7 @@ body {
   .btn-primary,
   .btn-secondary,
   .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-800;
+    @apply inline-flex min-h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3.5 text-[15px] font-extrabold transition duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pine-800;
   }
   .btn-primary {
     @apply bg-clay-600 text-white hover:bg-clay-700 hover:-translate-y-0.5;
@@ -149,5 +148,64 @@ body.menu-open .mobile-sticky-cta {
 @media (max-width: 767px) {
   body.sticky-cta-on #main {
     padding-bottom: 5.5rem;
+  }
+}
+
+/* Shared accessible foundations for the QR gateway and marketing pages. */
+:focus-visible {
+  outline: 2px solid var(--color-clay-700);
+  outline-offset: 4px;
+}
+::selection {
+  background: #f4cfe2;
+  color: #1a2e24;
+}
+.brand-selector {
+  background:
+    radial-gradient(ellipse at 0% 0%, #e5ede5, transparent 55%),
+    var(--color-cream);
+}
+.destination-card {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-sand-200);
+  border-radius: 1.25rem;
+  background: white;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.destination-card:hover {
+  border-color: var(--color-pine-800);
+  box-shadow: var(--shadow-lift);
+}
+.hero-section {
+  background: linear-gradient(115deg, #f6f4ee 50%, #ecefe7 100%);
+}
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+  background: white;
+  color: #1a2e24;
+  padding: 0.75rem 1rem;
+  font-weight: 800;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

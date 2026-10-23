@@ -37,6 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${nunito.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <a href="#main" className="skip-link">Skip to content</a>
         <JsonLd data={localBusinessJsonLd()} />
         <SiteChrome>{children}</SiteChrome>
       </body>
