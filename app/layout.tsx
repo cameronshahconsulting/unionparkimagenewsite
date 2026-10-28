@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/SiteChrome";
 import { JsonLd, localBusinessJsonLd } from "@/components/JsonLd";
 import { site } from "@/lib/site";
+import { GOOGLE_ADS_ID } from "@/lib/gtag";
 
 /** Same sans family Annie's uses for body — keeps the two brands feeling related. */
 const nunito = Nunito_Sans({
@@ -40,6 +42,16 @@ export default function RootLayout({
         <a href="#main" className="skip-link">Skip to content</a>
         <JsonLd data={localBusinessJsonLd()} />
         <SiteChrome>{children}</SiteChrome>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag("js", new Date());
+gtag("config", "${GOOGLE_ADS_ID}");`}
+        </Script>
       </body>
     </html>
   );

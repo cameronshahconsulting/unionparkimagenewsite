@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { site, towns } from "@/lib/site";
 import type { DesignBreakdown } from "@/lib/ai";
 import { prepareEstimateImage } from "./imageUtils";
+import { trackLeadConversion } from "@/lib/gtag";
 
 export interface ChosenDesign {
   originalPhoto: string;
@@ -56,6 +57,7 @@ export function EstimateForm({
         throw new Error(body?.error ?? "Something went wrong.");
       }
       setStatus("sent");
+      trackLeadConversion("visualizer");
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Something went wrong.");

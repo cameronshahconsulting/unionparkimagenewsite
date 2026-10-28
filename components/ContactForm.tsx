@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { site, services, towns } from "@/lib/site";
+import { trackLeadConversion } from "@/lib/gtag";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -33,6 +34,7 @@ export function ContactForm({
         throw new Error(body?.error ?? "Something went wrong.");
       }
       setStatus("sent");
+      trackLeadConversion("contact");
       form.reset();
     } catch (err) {
       setStatus("error");
