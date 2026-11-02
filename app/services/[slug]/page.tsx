@@ -6,7 +6,7 @@ import { CtaSection, FaqSection } from "@/components/Sections";
 import { JsonLd, serviceJsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { serviceContent, getService } from "@/content/services";
 import { site } from "@/lib/site";
-import { servicePhotos } from "@/lib/photos";
+import { projectPhotos } from "@/lib/photos";
 
 export function generateStaticParams() {
   return serviceContent.map((s) => ({ slug: s.slug }));
@@ -74,8 +74,8 @@ export default async function ServicePage({
           </div>
           <Scene
             variant={service.scene}
-            photo={servicePhotos[service.slug]}
-            alt={`${service.short} project example`}
+            photo={projectPhotos[service.slug][0].src}
+            alt={projectPhotos[service.slug][0].alt}
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />
@@ -146,6 +146,19 @@ export default async function ServicePage({
         </div>
       </section>
 
+      <section aria-labelledby="project-photos" className="container-site py-14 sm:py-20">
+        <p className="eyebrow">From the field</p>
+        <h2 id="project-photos" className="heading-display mt-2 text-3xl sm:text-4xl">{service.short} in detail</h2>
+        <div className="mt-7 grid gap-x-5 gap-y-7 sm:grid-cols-2 lg:grid-cols-3">
+          {projectPhotos[service.slug].slice(1).map((p) => (
+            <figure key={p.src}>
+              <Scene variant={service.scene} photo={p.src} alt={p.alt} className="aspect-[4/3] rounded-xl" />
+              <figcaption className="mt-3 font-display font-semibold text-pine-950">{p.title}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
       <FaqSection faqs={service.faqs} title={`${service.short} questions, answered`} />
 
       {/* Related */}
@@ -157,7 +170,7 @@ export default async function ServicePage({
               <Link key={r.slug} href={`/services/${r.slug}`} className="card group overflow-hidden transition-shadow hover:shadow-lift">
                 <Scene
                   variant={r.scene}
-                  photo={servicePhotos[r.slug]}
+                  photo={projectPhotos[r.slug][0].src}
                   alt=""
                   className="aspect-[16/9]"
                 />

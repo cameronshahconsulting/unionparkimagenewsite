@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { projectPhotos } from "@/lib/photos";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -34,11 +35,11 @@ export default function BrandSelector() {
           <Link href="/home" className="destination-card group">
             <div className="relative h-16 overflow-hidden sm:h-52">
               <Image
-                src="/images/service-hardscaping.jpg"
-                alt="Patio and landscaped outdoor living space"
+                src={projectPhotos.hardscaping[0].src}
+                alt={projectPhotos.hardscaping[0].alt}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover object-[50%_74%] transition-transform duration-500 group-hover:scale-105"
                 preload
               />
               <span className="absolute bottom-2 left-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-pine-950">
@@ -64,11 +65,11 @@ export default function BrandSelector() {
           <a href={site.sisterBrand.url} className="destination-card group">
             <div className="relative h-16 overflow-hidden sm:h-52">
               <Image
-                src="/images/service-area-garden.jpg"
-                alt="Lush garden filled with shrubs and flowering plants"
+                src={projectPhotos["landscape-design"][2].src}
+                alt={projectPhotos["landscape-design"][2].alt}
                 fill
                 sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover object-[50%_20%] transition-transform duration-500 group-hover:scale-105"
                 preload
               />
               <span className="absolute bottom-2 left-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest text-pine-950">

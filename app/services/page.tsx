@@ -5,7 +5,7 @@ import { CtaSection, Eyebrow } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { serviceContent } from "@/content/services";
 import { site } from "@/lib/site";
-import { servicePhotos } from "@/lib/photos";
+import { projectPhotos } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Landscaping Services in New Castle County, DE",
@@ -45,8 +45,8 @@ export default function ServicesPage() {
               >
                 <Scene
                   variant={s.scene}
-                  photo={servicePhotos[s.slug]}
-                  alt={`${s.short} project example`}
+                  photo={projectPhotos[s.slug][0].src}
+                  alt={projectPhotos[s.slug][0].alt}
                   className="aspect-[16/9] sm:aspect-auto sm:h-full"
                 />
                 <div className="p-6">

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { Scene } from "@/components/Scene";
 import { CtaSection, Eyebrow } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
-import { galleryPhotos } from "@/lib/photos";
+import { serviceContent } from "@/content/services";
+import { projectPhotos } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "Project Gallery | Landscaping in New Castle County, DE",
@@ -27,28 +28,29 @@ export default function GalleryPage() {
             <Eyebrow>Our work</Eyebrow>
             <h1 className="heading-display mt-2 text-4xl sm:text-5xl">Project gallery</h1>
             <p className="mt-4 text-lg text-ink-soft">
-              A sample of recent work across New Castle County. Want to see how your
-              own yard could look?{" "}
-              <Link href="/home/#visualizer" className="font-semibold text-pine-700 underline underline-offset-4">
+              Explore patios, planting beds, and the details that go into caring for a yard. Want to see what might work at your home?{" "}
+              <Link href="/designer" className="font-semibold text-pine-700 underline underline-offset-4">
                 Try the free AI yard designer
               </Link>
               .
             </p>
           </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {galleryPhotos.map((p) => (
-              <figure key={p.photo} className="card overflow-hidden">
-                <Scene
-                  variant={p.variant}
-                  photo={p.photo}
-                  alt={`${p.title} in ${p.town}`}
-                  className="aspect-[4/3]"
-                />
-                <figcaption className="p-5">
-                  <p className="font-display font-semibold text-pine-950">{p.title}</p>
-                  <p className="mt-1 text-sm text-ink-soft">{p.town}</p>
-                </figcaption>
-              </figure>
+          <div className="mt-12 space-y-14">
+            {serviceContent.map((s) => (
+              <section key={s.slug} aria-labelledby={s.slug}>
+                <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-t border-sand-200 pt-5">
+                  <h2 id={s.slug} className="heading-display text-2xl sm:text-3xl">{s.short}</h2>
+                  <Link href={`/services/${s.slug}`} aria-label={`Explore ${s.short.toLowerCase()} services`} className="font-semibold text-pine-700 underline underline-offset-4">Explore service →</Link>
+                </div>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  {projectPhotos[s.slug].slice(0, 2).map((p) => (
+                    <figure key={p.src}>
+                      <Scene variant={s.scene} photo={p.src} alt={p.alt} className="aspect-[4/3] rounded-xl" />
+                      <figcaption className="mt-2.5 text-sm font-medium text-ink-soft">{p.title}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </section>
             ))}
           </div>
         </div>

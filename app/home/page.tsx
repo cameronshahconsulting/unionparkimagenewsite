@@ -9,7 +9,7 @@ import {
   Eyebrow,
 } from "@/components/Sections";
 import { site, services, towns } from "@/lib/site";
-import { photos, servicePhotos } from "@/lib/photos";
+import { photos, projectPhotos } from "@/lib/photos";
 import { getGoogleReviews } from "@/lib/google-reviews";
 
 export const metadata: Metadata = {
@@ -82,10 +82,10 @@ export default async function HomePage() {
             </a>
           </div>
           <div className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] sm:aspect-[5/4] lg:aspect-[4/5]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem] sm:aspect-[5/4] lg:aspect-[1/1]">
               <Image
                 src={photos.heroHome}
-                alt="Garden beds and a curved walkway framing a welcoming home"
+                alt="A striped front lawn with a circular planting bed beneath a mature shade tree"
                 fill
                 sizes="(max-width: 1023px) 100vw, 52vw"
                 className="object-cover"
@@ -132,8 +132,8 @@ export default async function HomePage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden rounded-xl">
                   <Image
-                    src={servicePhotos[service.slug]}
-                    alt={`${service.short} inspiration`}
+                    src={projectPhotos[service.slug][0].src}
+                    alt={projectPhotos[service.slug][0].alt}
                     fill
                     sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -162,8 +162,8 @@ export default async function HomePage() {
         <div className="container-site grid items-center gap-9 py-12 sm:py-16 lg:grid-cols-2 lg:gap-16">
           <div className="relative aspect-[4/3] overflow-hidden rounded-xl">
             <Image
-              src="/images/gallery-patio-hockessin.jpg"
-              alt="Paver patio with a circular fire pit and surrounding planting"
+              src={projectPhotos.hardscaping[0].src}
+              alt={projectPhotos.hardscaping[0].alt}
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
               className="object-cover"

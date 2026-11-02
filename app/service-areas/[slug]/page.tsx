@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Scene } from "@/components/Scene";
-import { CtaSection, FaqSection, Testimonials, Eyebrow } from "@/components/Sections";
+import { CtaSection, FaqSection, Testimonials } from "@/components/Sections";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import { townContent, getTown } from "@/content/towns";
 import { getService } from "@/content/services";
@@ -75,7 +75,7 @@ export default async function TownPage({
           <Scene
             variant="home"
             photo={photos.townHero}
-            alt={`Landscaped home in ${town.name}, Delaware`}
+            alt="A striped lawn and planting beds at a red brick home"
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />

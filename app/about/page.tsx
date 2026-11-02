@@ -67,7 +67,7 @@ export default function AboutPage() {
           <Scene
             variant="home"
             photo={photos.aboutCrew}
-            alt="Union Park Landscaping crew installing plants at a Delaware residential jobsite"
+            alt="A crew member collecting autumn leaves beside the pink work truck"
             className="aspect-[4/3] w-full rounded-3xl shadow-lift"
             priority
           />
@@ -100,7 +100,7 @@ export default function AboutPage() {
           <Scene
             variant="garden"
             photo={photos.aboutGarden}
-            alt="Close-up of a landscaper planting shrubs in a prepared garden bed"
+            alt="A curved planting bed with clipped shrubs and a pale stone border"
             className="order-2 aspect-[4/3] w-full rounded-3xl shadow-lift lg:order-1"
           />
           <div className="order-1 lg:order-2">
